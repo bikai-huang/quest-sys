@@ -1,0 +1,72 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" class="gr__wjx_cn"><head id="Head1"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>
+	北京师范大学问卷系统登录
+</title><meta content="北京师范大学问卷系统" name="keywords">
+       <link rel="stylesheet" href="./css/index.css" type="text/css">
+       <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+       <script type="text/javascript" src="./js/common.js"></script>
+    <style>
+        .divAnti input {
+            width: 140px !important;
+            padding-left: 16px !important;
+            border: none;
+            height: 46px !important;
+            line-height:46px !important;
+            font-size: 14px;
+            padding-left: 46px;
+            border-radius: 100px;
+            border: 1px solid #e6e6e6;
+            float: left !important;
+        }
+    </style>
+</head>
+
+<body>
+<div id="divSojump" class="validate-box">
+    <fieldset class="validate-wrapper">
+        <legend class="validate-caption">密码找回</legend>
+        <ul>
+            <li>
+                <label for="user-name" class="icon user-icon"></label>
+                <input id="email" placeholder="请输入绑定的Email" class="validate-input user-name" type="text" onfocus="if(value==&#39;请输入绑定的Email&#39;){value=&#39;&#39;;}" onblur="if(value==&#39;&#39;){value=&#39;用户名/Email/手机&#39;}">
+                <div class="divclear"></div>
+            </li>
+        </ul>
+
+    </fieldset>
+    <fieldset class="submit-wrapper" style="text-align: center; margin-top: 20px;">
+        <input type="submit" value="发送密码重置请求" id="resetPassword" onclick="resetPassword();" class="submitbutton" onmouseover="this.className=&#39;submitbutton submitbutton_hover&#39;;" onmouseout="this.className=&#39;submitbutton&#39;;" style="color:White;">
+    </fieldset>
+</div>
+</body>
+<script>
+function resetPassword() {
+    var email = $('#email').val();
+    if(!email) {
+        alert('请输入绑定的邮箱.');
+        return;
+    }
+
+    $.ajax({
+			url: host + '/api/getResetPasswordEmail/',
+			type: "GET",
+			dataType: "json", 
+			data: {email: email},
+			cache: false,
+			success: function(result) {
+				console.log(result.paperList)
+				if (result.state == 200) {
+					alert('重置密码邮件已发送，请一会查收！');
+				} else {
+					alert(result.data.error);
+				}
+			},
+			error: function(XMLHttpRequest, textStatus, errorThrown) {
+												
+      		}
+		});
+}
+</script>
+
+</html>

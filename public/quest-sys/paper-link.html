@@ -1,0 +1,101 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>北京师范大学问卷系统-问卷链接</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="images/white-logo.png">
+  <link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+  <script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="./js/common.js"></script></head>
+   <link rel="stylesheet" type="text/css" href="./css/wjxmaster.css">
+<style>
+body{
+	
+}
+
+textarea{
+	width: 100%;
+}
+
+.paper-title{
+	color: #1874CD;
+	text-align: center;
+	font-size: 24px;
+	margin-top: 30px;
+	margin-bottom: 30px;
+}
+
+.container{
+	background-color: white;
+	margin: 7% 6% 10%;
+}
+.topic-desc{
+	font-weight: bold;
+}
+.split-line{
+	height: 5px;
+	border-bottom: 1px solid #FAF0E6;
+	margin-bottom: 30px;
+}
+
+.link{
+	width: 100%;
+}
+</style>
+<body >
+<div id="BS" style="background: #FFFFFF;" >
+		<div id="BS" style="background: #FFFFFF;" >
+            </div>
+            <script>
+                getHeaderHtml();
+            </script> 
+      </div> 
+	</div>
+	
+	<div class="container">
+    	<div class="col-md-4 col-xs-12 col-lg-4" >
+    	</div>
+		<div class="col-md-4 col-xs-12 col-lg-4 content" >
+    		<p>问卷链接</p>
+    		<input type="text" value="" id="link" class="link" />
+    		<br><br>
+    		<p>二维码</p>
+			<img src="" id="code" />
+    		</div>
+    	</div>
+    	
+    </div>
+</body>
+<script type="text/javascript" >
+
+var id = getvl('id');
+$(function () {
+	getPaper();
+});
+
+function getPaper() {
+    	$.ajax({
+			url: host + '/api/a/getPaper',
+			type: "GET",
+			dataType: "json", 
+			data: {token: token, id: id},
+			cache: false,
+			success: function(result) {
+				console.log(result.paperList)
+				if (result.state == 200) {
+					$('#link').val(result.data.url);
+					$('#code').attr('src', 'http://qr.liantu.com/api.php?text=' + result.data.url);
+				} else {
+					alert(result.data.error);
+				}
+			},
+			error: function(XMLHttpRequest, textStatus, errorThrown) {
+												
+      		}
+		});
+    }
+</script>
+</html>

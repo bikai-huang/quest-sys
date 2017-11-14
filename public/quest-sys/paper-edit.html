@@ -1,0 +1,827 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>北京师范大学问卷系统--修改问卷</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="images/white-logo.png">
+  <link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+  <script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="./js/common.js"></script></head>
+   <link rel="stylesheet" type="text/css" href="./css/default.css">
+  <link rel="stylesheet" type="text/css" href="./css/wjxmaster.css">
+  
+  
+<style>
+.title-container{
+	padding: 5% 10% 0 10%;
+}
+.container{
+	padding: 10px 5%;
+}
+.paper-title{
+	width: 100%;
+	margin-bottom: 10px;
+}
+.paper-title-div{
+	padding: 10px;
+}
+.paper-desc-p{
+	font-size: 20px;
+	margin-bottom: 10px;
+}
+.paper-desc{
+	width: 100%;
+	margin-bottom: 10px;
+}
+.title-btn{
+	font-size: 16px;
+	padding: 10px 15px;
+}
+
+.topic{
+	background-color: #cfe7ff;
+	overflow: auto;
+	padding: 20px 0px;
+	margin: 40px auto;
+}
+.topic-title{
+	width: 100%;
+}
+
+.option-title{
+	width: 100%;
+	overflow: auto;
+}
+.option-text{
+	width: 50%;
+	text-align: left;
+	float: left;
+	padding: 5px 15px 5px 0;
+}
+.option-text-img{
+	width: 50%;
+	text-align: left;
+	float: left;
+	padding: 5px 15px;
+}
+.topic-option-input{
+	width: 96%;
+}
+.option-input-div{
+	margin: 0;
+	padding: 0;
+}
+.btn{
+	padding-top: 4px;
+	padding-bottom: 4px;
+}
+.topic-btn{
+	right: 20px;
+	position: absolute;
+	top: 90px;
+}
+.topic-btn-line{
+	margin: 10px auto;
+	overflow: auto;
+}
+.option-detail{
+	margin-bottom: 10px;
+	overflow: auto;
+}
+.option-row{
+	margin-bottom: 10px;
+	overflow: auto;
+}
+
+.option-text-table{
+	width: 25%;
+	text-align: left;
+	float: left;
+	padding: 5px 15px 5px 0;
+}
+.topic-option-table{
+	width: 48%;
+}
+.topic-option-value{
+	width: 10%;
+	margin-left: 5px;
+}
+
+.topic-option-fill-desc {
+	width: 48%;
+}
+.topic-option-fill-line {
+	width: 46%;
+	border: 0;
+	border-bottom: 1px solid #909ba7;
+	background-color: #cfe7ff;
+	margin-left: 10px;
+}
+</style>
+<body >
+<div style="background: #FFFFFF;" >
+		<div id="BS" style="background: #FFFFFF;" >
+            </div>
+            <script>
+                getHeaderHtml();
+            </script> 
+      </div> 
+	</div>
+
+	<div class="upload" style="display: block;">
+		<div class="upload-content">
+			<label>图片地址</label>
+			<input type="text" value="请输入网络图片的Url地址" />
+			<label>上传图片</label>
+			<input type="file" id="uploadFile" />
+			<input type="button" onclick="" />
+		</div>
+	</div>
+
+<div class="title-container">
+	<div class="paper-title-div">
+		<label for="title">问卷名称：</label>
+		<input name="title"  class="paper-title" value="" type="text" />
+		<label for="desc">问卷描述说明：</label>
+		<textarea name="desc"  class="paper-desc" value="" type="text" ></textarea>
+		<button class="btn btn-primary main-banner-btn title-btn" type="button" onclick="savePaper()">提交标题</button>
+		<br>
+	</div>
+</div>
+
+<div class="container">
+	<!-- 选择题 -->
+	<div class="topic" id="default-topic" style="display: none;">
+		<div class="col-md-6 col-xs-12 col-lg-6" >
+			<label for="topicTitle">题目:</label>
+			<textarea class="topic-title" rows="5"></textarea>
+		</div>
+		
+		<div class="topic-type col-md-6 col-xs-12 col-lg-6">
+			<label for="topicType">题目类型:</label>
+			<select class="form-control topicType-select">
+				<option value="0" selected>单选题</option>
+				<option value="1">多选题</option>
+				<option value="2">问答题</option>
+				<option value="3">填空题</option>
+				<option value="4">量表题</option>
+				<option value="5">下拉框</option>
+				<option value="6">文件上传</option>
+			</select>
+			<br>
+			<label for="topicImg">上传配图说明:</label>
+			<button class="btn btn-primary topic-btn" type="button" >上传图片</button>
+		</div>
+
+
+		<div class="col-md-12 col-xs-12 col-lg-12 option-detail">
+			<div class="option-title ">
+				<div class="option-text" >选项文字</div>
+				<div class="option-text-img" >上传选项配图说明</div>
+			</div>
+	
+			<div id="option_hidden" style="display: none;" class="option-row">
+				<div class="col-md-6 col-xs-12 col-lg-6 option-input-div">
+					<input class="topic-option-input" ></input>
+				</div>
+				<!--
+				<div class="col-md-3 col-xs-12 col-lg-3">
+					<input type="file" >
+				</div>
+				-->
+				<div class="col-md-3 col-xs-12 col-lg-3">
+					<button class="btn btn-info" type="button" >上传图片</button>
+					<button class="btn btn-warning" type="button" id="cloneHiddenOption">增加</button>
+					<button class="btn btn-danger" type="button" id="removeHiddenOption">移除</button>
+				</div>
+			</div>
+	
+			<div id="option-list" class="option-row">
+				<div class="col-md-6 col-xs-12 col-lg-6 option-input-div">
+					<input class="topic-option-input" ></input>
+				</div>
+				<!--
+				<div class="col-md-3 col-xs-12 col-lg-3">
+					<input type="file" >
+				</div>
+				-->
+				<div class="col-md-3 col-xs-12 col-lg-3">
+					<button class="btn btn-info" type="button" >上传图片</button>
+					<button class="btn btn-warning" type="button" id="cloneOption">增加</button>
+					<button class="btn btn-danger" type="button" id="removeOption">移除</button>
+				</div>
+			</div>
+		</div>
+
+		<div class="col-md-12 col-xs-12 col-lg-12 topic-btn-line">
+			<button class="btn btn-info" type="button" id="cloneTopic">新增</button>
+			<button class="btn btn-warning" type="button" id="removeTopic">删除</button>
+		</div>
+	</div>
+
+	<div id="0"></div>
+
+
+</div>
+</body>
+<script type="text/javascript" >
+
+var id = getvl('id');
+var topics = new Array();
+var topic_index = new Array();
+
+var topic_number = 0;
+$(function () {
+	getPaper();
+});
+
+var upload_target_id;
+function upload() {
+    var formData = new FormData();
+    formData.append('file', $('#uploadFile')[0].files[0]);
+    $.ajax({
+        url: host + '/api/a/upload',
+        type: 'POST',
+        cache: false,
+        data: formData,
+        processData: false,
+        contentType: false
+    }).done(function(res) {
+		alert('res.data.url:' + res.data.url);
+		$('#' + upload_target_id).val(res.data.url + res.data.respBody.key);
+    }).fail(function(res) {
+		alert('网络拥堵，请重新上传～');
+    });
+}
+
+function getPaper() {
+    	$.ajax({
+			url: host + '/api/a/getPaper',
+			type: "GET",
+			dataType: "json", 
+			data: {token: token, id: id},
+			cache: false,
+			success: function(result) {
+				if (result.state == 200) {
+					$('.paper-title').val(result.data.title);
+					$('.paper-desc').val(result.data.desc);
+					var htmls = '';
+					if(result.data.topics.length == 0) {
+						addTopic(0);
+					}
+
+					$.each(result.data.topics, function(i, item) {
+						var html = '';
+						html += '<div class="topic" id="' + i + '">';
+						html += '<div class="col-md-6 col-xs-12 col-lg-6" ><label for="topicTitle">题目:</label>';
+						html += '<textarea class="topic-title" rows="5" id="topicTitle' + i + '" >' + item.tdesc + '</textarea></div>';
+
+						html += '<div class="topic-type col-md-6 col-xs-12 col-lg-6"><label for="topicType">题目类型:</label>';
+						html += '<select class="form-control" name="topicType' + i + "\" onChange='changeType(\"" + i + "option\", \"topicType" + i + "\");' >";
+						
+						var selected_0 = '';
+						var selected_1 = '';
+						var selected_2 = '';
+						var selected_3 = '';
+						var selected_4 = '';
+						var selected_5 = '';
+						var selected_6 = '';
+						if(item.ttype==0) {
+							selected_0 = 'selected';
+						} else if(item.ttype==1) {
+							selected_1 = 'selected';
+						} else if(item.ttype==2) {
+							selected_2 = 'selected';
+						} else if(item.ttype==3) {
+							selected_3 = 'selected';
+						} else if(item.ttype==4) {
+							selected_4 = 'selected';
+						} else if(item.ttype==5) {
+							selected_5 = 'selected';
+						} else if(item.ttype==6) {
+							selected_6 = 'selected';
+						}
+						html += '<option value="0"' + selected_0 + '>单选题</option>';
+						html += '<option value="1"' + selected_1 + '>多选题</option>';
+						html += '<option value="2"' + selected_2 + '>问答题</option>';
+						html += '<option value="3"' + selected_3 + '>填空题</option>';
+						html += '<option value="4"' + selected_4 + '>量表题</option>';
+						html += '<option value="5"' + selected_5 + '>下拉框</option>';
+						html += '<option value="6"' + selected_6 + '>文件上传</option>';
+						html += '</select><br>';
+						
+						$("#country option:selected").attr("selected", "selected");
+						// $(html).find('[name="topicType' + i + '"]').val(item.ttype);
+						
+						html += '<label for="topicImg">上传配图说明:</label>';
+						// html += '<input type="file" id="inputTopic' + i + '" name=inputTopic' + i + '" class="input-file">';
+						html += '<button class="btn btn-primary topic-btn" type="button" ' + "onclick='importFile(\"inputTopic" + i + "\");' >" + '上传图片</button>';
+						html += '</div>';
+
+						html += '<div class="col-md-12 col-xs-12 col-lg-12 option-detail" id="' + i + 'option" style="display:block;">';
+						if (item.ttype == 0 || item.ttype == 1) {
+							html += option_0_title;
+							html += '<div id="option_hidden' + i + '" style="display: none;" class="option-row">' +
+										'<div class="col-md-6 col-xs-12 col-lg-6 option-input-div">' +
+											'<input class="topic-option-input" ></input>' +
+										'</div>' +
+										// '<div class="col-md-3 col-xs-12 col-lg-3">' +
+										// 	'<input type="file" >' +
+										// '</div>' +
+										'<div class="col-md-3 col-xs-12 col-lg-3">' +
+											'<button class="btn btn-info" type="button" >上传图片</button>' +
+											'<button class="btn btn-warning" type="button" id="clonebtn' + i + '">增加</button>' +
+											'<button class="btn btn-danger" type="button" id="removebtn' + i + '">移除</button>' +
+										'</div>' +
+									'</div>';
+						} else if(item.ttype == 3) {
+							html += option_3_title;
+							html += '<div id="option_hidden' + i + '" style="display: none;" class="option-row">' +
+										'<div class="col-md-6 col-xs-12 col-lg-6 option-input-div">' +
+											'<input class="topic-option-fill-desc" ></input>' +
+											'<input class="topic-option-fill-line" disabled></input>' +
+										'</div>' +
+										'<div class="col-md-3 col-xs-12 col-lg-3">' +
+											'<button class="btn btn-warning" type="button" id="clonebtn' + i + '">增加</button>' +
+											'<button class="btn btn-danger" type="button" id="removebtn' + i + '">移除</button>' +
+										'</div>' +
+									'</div>';
+						} else if(item.ttype == 4){
+							html += option_4_title;
+							html += '<div id="option_hidden' + i + '" style="display: none;" class="option-row">' +
+										'<div class="col-md-6 col-xs-12 col-lg-6 option-input">' +
+											'<input class="topic-option-table" ></input>' +
+											'<input class="topic-option-value" ></input>' +
+										'</div>' +
+										'<div class="col-md-3 col-xs-12 col-lg-3">' +
+											'<button class="btn btn-warning" type="button" id="clonebtn' + i + '">增加</button>' +
+											'<button class="btn btn-danger" type="button" id="removebtn' + i + '">移除</button>' +
+										'</div>' +
+									'</div>';
+						} else if(item.ttype == 5){
+							html += option_5_title;
+							html += '<div id="option_hidden' + i + '" style="display: none;" class="option-row">' +
+										'<div class="col-md-6 col-xs-12 col-lg-6 option-input">' +
+											'<input class="topic-option-input" ></input>' +
+										'</div>' +
+										'<div class="col-md-3 col-xs-12 col-lg-3">' +
+											'<button class="btn btn-warning" type="button" id="clonebtn' + i + '">增加</button>' +
+											'<button class="btn btn-danger" type="button" id="removebtn' + i + '">移除</button>' +
+										'</div>' +
+									'</div>';
+						} else if(item.ttype == 6){
+							html += option_6_title;
+							html += '<div id="option_hidden' + i + '" style="display: none;" class="option-row">' +
+										'<div class="col-md-6 col-xs-12 col-lg-6 option-input">' +
+											'<input class="topic-option-input" ></input>' +
+										'</div>' +
+										'<div class="col-md-3 col-xs-12 col-lg-3">' +
+											'<input type="file" >' +
+										'</div>' +
+										'<div class="col-md-3 col-xs-12 col-lg-3">' +
+											'<button class="btn btn-warning" type="button" id="clonebtn' + i + '">增加</button>' +
+											'<button class="btn btn-danger" type="button" id="removebtn' + i + '">移除</button>' +
+										'</div>' +
+									'</div>';
+						}
+
+						if (item.ttype != 2) {
+							$.each(item.options, function(p, opItem) {
+								html += '<div id="' + i + 'option' + p + '" class="option-row" >';
+
+						if (item.ttype == 0 || item.ttype == 1) {
+							html += '<div class="col-md-6 col-xs-12 col-lg-6 option-input-div">' +
+										'<input class="topic-option-input" value="' + opItem.odesc + '"></input>' +
+									'</div>' +
+									// '<div class="col-md-3 col-xs-12 col-lg-3">' +
+									// 	'<input type="file" >' +
+									// '</div>' +
+									'<div class="col-md-3 col-xs-12 col-lg-3">' +
+										'<button class="btn btn-info" type="button" >上传图片</button>';
+						} else if(item.ttype == 3) {
+							html += '<div class="col-md-6 col-xs-12 col-lg-6 option-input-div">' +
+										'<input class="topic-option-fill-desc" value="' + opItem.odesc + '"></input>' +
+										'<input class="topic-option-fill-line" disabled></input>' +
+									'</div>' +
+									'<div class="col-md-3 col-xs-12 col-lg-3">';
+						} else if(item.ttype == 4){
+							html += '<div class="col-md-6 col-xs-12 col-lg-6 option-input-div">' +
+										'<input class="topic-option-table" value="' + opItem.odesc + '"></input>' +
+										'<input class="topic-option-value" value="' + opItem.point + '"></input>' +
+									'</div>' +
+									'<div class="col-md-3 col-xs-12 col-lg-3">';
+						} else if(item.ttype == 5){
+							html += '<div class="col-md-6 col-xs-12 col-lg-6 option-input-div">' +
+										'<input class="topic-option-input" value="' + opItem.odesc + '"></input>' +
+									'</div>' +
+									'<div class="col-md-3 col-xs-12 col-lg-3">';
+						} else if(item.ttype == 6){
+							html +=  '<div class="col-md-6 col-xs-12 col-lg-6 option-input-div">' +
+										'<input class="topic-option-input" value="' + opItem.odesc + '"></input>' +
+									'</div>' +
+									'<div class="col-md-3 col-xs-12 col-lg-3">' +
+										'<input type="file" >' +
+									'</div>' +
+									'<div class="col-md-3 col-xs-12 col-lg-3">';
+						}
+
+						html += '<button class="btn btn-warning" type="button" ' + "onclick='cloneOption(\"option_hidden" + i + "\", " + i + ",\"" + i + "option" + p + "\");'" + ' >增加</button>' +
+								'<button class="btn btn-danger" type="button" ' + "onclick='removeOption(\"" + i + "option" + p + "\");'" + ' >移除</button>' +
+							'</div>';
+
+								html += '</div>';
+							});
+						}
+						html += '</div>';
+						html += '<div class="col-md-12 col-xs-12 col-lg-12 topic-btn-line">';
+						html += ' <button class="btn btn-info" type="button" onclick="addTopic(' + i + ');" >新增</button>';
+						html += ' <button class="btn btn-warning" type="button" onclick="removeTopic(' + i + ');">删除</button>';
+						html += '</div>';
+						html += '</div>';
+						topic_number = i;
+						topic_index.push(i);
+						htmls += html;
+					});
+					htmls += '<button class="btn btn-primary title-btn" type="button" onclick="savePaper();">修改问卷</button><br><br>';
+          			$('.container').append(htmls);
+				} else {
+					alert(result.data.error);
+				}
+			},
+			error: function(XMLHttpRequest, textStatus, errorThrown) {
+												
+      		}
+		});
+	}
+	
+
+function saveTitle() {
+	var title = $('.paper-title').val();
+	if(!title) {
+		alert('标题不能为空！');
+		return;
+	}
+	var desc = $('.paper-desc').val();
+	$.ajax({
+		url: host + '/api/a/updatePaperTitle',
+		type: "POST",
+		dataType: "json", 
+		data: {token: token, id: id, title: title, desc: desc},
+		cache: false,
+		success: function(result) {
+			if (result.state == 200) {
+				alert('标题修改成功！');
+			} else {
+				alert(result.data.error);
+			}
+		},
+		error: function(XMLHttpRequest, textStatus, errorThrown) {
+												
+      	}
+	});
+}
+
+var optionNum = 100;
+function cloneOption(cloneId, topic_number, targetId) {
+	alert('cloneId:' + cloneId + '_topic_number:' + topic_number + '_targetId:' + targetId);
+	var ophtml = $('#' + cloneId).clone().attr('id', topic_number + 'option' + optionNum).show();
+	$(ophtml).find('#clonebtn' + topic_number).attr('id', 'clonebtn' + optionNum);
+	$(ophtml).find('#removebtn' + topic_number).attr('id', 'removebtn' + optionNum);
+	var oldOptionNum = optionNum;
+	$(ophtml).find('#removebtn' + optionNum).click(function(){
+		removeOption(topic_number + 'option' + oldOptionNum);
+	});
+	$(ophtml).find('#clonebtn' + optionNum).click(function(){
+		cloneOption('option_hidden' + topic_number, topic_number, topic_number + 'option' + oldOptionNum);
+	});
+	$('#' + targetId).after(ophtml);
+	optionNum = optionNum + 1;
+}
+
+function removeOption(id) {
+	$('#' + id).remove();
+}
+
+function removeTopic(id) {
+	if(confirm('确定删除这道问题吗？')) {
+		$('#' + id).remove();
+		removeTopicIndexToArray(id);
+		resetTopicIndex();
+	}
+}
+
+function addTopic(id) {
+	
+	topic_number = topic_number + 1;
+	var correntIndex = topic_number;
+	var topicHtml = $('#default-topic').clone().attr('id', topic_number).show();
+	
+	//todo
+	$(topicHtml).find('.topic-title').attr('id', 'topicTitle' + topic_number);
+	$(topicHtml).find('.topicType-select').attr('name', 'topicType' + topic_number);
+	$(topicHtml).find('.topicType-select').change(function() {
+		changeType(topic_number + 'option', 'topicType' + topic_number);
+	});
+	$(topicHtml).find('.option-detail').attr('id', topic_number + 'option');
+	$(topicHtml).find('#option_hidden').attr('id', 'option_hidden' + topic_number);
+	$(topicHtml).find('#cloneHiddenOption').attr('id', 'clonebtn' + topic_number);
+	$(topicHtml).find('#removeHiddenOption').attr('id', 'removebtn' + topic_number);
+	$(topicHtml).find('#option-list').attr('id', topic_number + 'option' + 0);
+
+	$(topicHtml).find('#cloneOption').attr('id', topic_number + 'cloneOption' + 0);
+	$(topicHtml).find('#removeOption').attr('id', topic_number + 'removeOption' + 0);
+
+	// alert('option_hidden' + topic_number + '_' + topic_number + '_' + topic_number + "option" + 0);
+	$(topicHtml).find('#' + topic_number + 'cloneOption' + 0).click(function() {
+		var _tem_number = $(this).attr('id').substring(0,1)
+		cloneOption('option_hidden' + _tem_number, _tem_number, _tem_number + "option" + 0);
+	});
+	$(topicHtml).find('#' + topic_number + 'removeOption' + 0).click(function() {
+		removeOption(topic_number + "option" + 0);
+	});
+
+	$(topicHtml).find('#cloneTopic').attr('id', topic_number + 'cloneOption');
+	$(topicHtml).find('#removeTopic').attr('id', topic_number + 'removeOption');
+	$(topicHtml).find('#' + topic_number + 'cloneOption').click(function() {
+		addTopic(correntIndex);
+	});
+	$(topicHtml).find('#' + topic_number + 'removeOption').click(function() {
+		removeTopic(correntIndex);
+	});
+	$('#' + id).after(topicHtml);
+	addTopicIndexToArray(id, topic_number);
+	resetTopicIndex();
+}
+
+function addTopicIndexToArray(currentIndex, newIndex) {
+	var newTopicIndexArray = new Array();
+	for(var i=0; i<topic_index.length; i++) {
+		if(topic_index[i] == currentIndex) {
+			newTopicIndexArray.push(topic_index[i]);
+			newTopicIndexArray.push(newIndex);
+		} else {
+			newTopicIndexArray.push(topic_index[i]);
+		}
+	}
+	topic_index = newTopicIndexArray;
+}
+
+function removeTopicIndexToArray(currentIndex) {
+	var newTopicIndexArray = new Array();
+	for(var i=0; i<topic_index.length; i++) {
+		if(topic_index[i] != currentIndex) {
+			newTopicIndexArray.push(topic_index[i]);
+		}
+	}
+	topic_index = newTopicIndexArray;
+}
+
+function changeType(optionId, typeName) {
+	var type = $('[name="' + typeName + '"]').val();
+	var id = optionId.substring(0, 1);
+	var newhtml = '';
+	$('#' + optionId).empty();
+	if(type == 0 || type == 1) {
+		newhtml = option_0_title + option_0;
+	} else if(type == 2) {
+
+	} else if(type == 3) {
+		newhtml = option_3_title + option_3;
+	} else if(type == 4) {
+		newhtml = option_4_title + option_4;
+	} else if(type == 5) {
+		newhtml = option_5_title + option_5;
+	} else if(type == 6) {
+		newhtml = option_6_title + option_6;
+	}
+	if(type != 2) {
+		$('#' + optionId).append(newhtml);
+		$('#' + optionId).find('#option_hidden').attr('id', 'option_hidden' + id);
+		$('#' + optionId).find('#cloneHiddenOption').attr('id', 'clonebtn' + id);
+		$('#' + optionId).find('#removeHiddenOption').attr('id', 'removebtn' + id);
+		$('#' + optionId).find('#option-list').attr('id', id + 'option' + 0);
+		cloneOption('option_hidden' + id , id, id + 'option' + 0);
+	}
+}
+
+
+function savePaper() {
+	var checkin = true;
+	for(var i=0; i<topic_index.length; i++) {
+		var topicTitle = $('#topicTitle' + topic_index[i]).val();
+		var type = $('[name="topicType' + topic_index[i] + '"]').val();
+		if(!topicTitle) {
+			checkin = false;
+			topics = new Array();
+			alert('题目不能为空！');
+			return;
+		}
+		var topic = {
+			tdesc: topicTitle,
+			ttype: type
+		}
+		if(type==0 || type==1 || type==5 || type==6) {
+			var options = new Array();
+			var option = $('#' + topic_index[i] + 'option').find('.topic-option-input');
+			$.each(option, function(i, item) {
+				if(i>0) {
+					if(!item.value) {
+						topics = new Array();
+						alert('选项文字不能为空！');
+						checkin = false;
+						return;
+					}
+					var option = {
+						odesc: item.value,
+						ocount: 0
+					};
+					options.push(option);
+				}
+			});
+			topic.options = options;
+		} else if(type==3) {
+			var options = new Array();
+			var option = $('#' + topic_index[i] + 'option').find('.topic-option-fill-desc');
+			$.each(option, function(i, item) {
+				if(i>0) {
+					if(!item.value) {
+						topics = new Array();
+						checkin = false;;
+						alert('填空文字说明不能为空！');
+						return 
+					}
+					var option = {
+						odesc: item.value,
+						ocount: 0
+					};
+					options.push(option);
+				}
+			});
+			topic.options = options;
+		} else if(type==4) {
+			var options = new Array();
+			var option = $('#' + topic_index[i] + 'option').find('.topic-option-table');
+			var optionVal = $('#' + topic_index[i] + 'option').find('.topic-option-value');
+			$.each(option, function(i, item) {
+				if(i>0) {
+					if(!item.value) {
+						topics = new Array();
+						checkin = false;;
+						alert('填空文字说明不能为空！');
+						return
+					}
+					var option = {
+						odesc: item.value,
+						point: optionVal[i].value,
+						ocount: 0
+					};
+					options.push(option);
+				}
+			});
+			topic.options = options;
+		}
+		topics.push(topic);
+	}
+	
+	if(checkin) {
+		$.ajax({
+		url: host + '/api/a/updatePaperTopic',
+		type: "POST",
+		dataType: "json", 
+		data: {token: token, id: id, topic: JSON.stringify(topics), format: 0},
+		cache: false,
+		success: function(result) {
+			if (result.state == 200) {
+				alert('修改成功！');
+				location.href='paper-list.html';
+			} else {
+				alert(result.data.error);
+			}
+		},
+		error: function(XMLHttpRequest, textStatus, errorThrown) {
+												
+      	}
+	});
+	}
+	
+}
+
+function resetTopicIndex() {
+	var startIndex = 1;
+	for(var i=0; i<topic_index.length; i++) {
+		var topicTitle = $('#topicTitle' + topic_index[i]).val();
+		var reg = new RegExp("^[0-9]*$");
+		var endIndex = 1;
+		for(var p=1; p<4; p++) {
+			if(topicTitle.length >= p && !reg.test(topicTitle.substring(0, p))){
+				endIndex = p-1;
+				break;
+			}
+		}
+		$('#topicTitle' + topic_index[i]).val(startIndex + topicTitle.substring(endIndex));
+		startIndex++;
+	}
+}
+
+function importFile(obj){
+
+}
+
+var option_0_title =  '<div class="option-title">' +
+					'<div class="option-text" >选项文字</div>' +
+					'<div class="option-text-img" >上传选项配图说明</div>' +
+				'</div>';
+var option_0 = 
+				'<div id="option_hidden" style="display: none;" class="option-row">' +
+					'<div class="col-md-6 col-xs-12 col-lg-6 option-input-div">' +
+						'<input class="topic-option-input" ></input>' +
+					'</div>' +
+					// '<div class="col-md-3 col-xs-12 col-lg-3">' +
+					// 	'<input type="file" >' +
+					// '</div>' +
+					'<div class="col-md-3 col-xs-12 col-lg-3">' +
+						'<button class="btn btn-info" type="button" >上传图片</button>' +
+						'<button class="btn btn-warning" type="button" id="cloneHiddenOption">增加</button>' +
+						'<button class="btn btn-danger" type="button" id="removeHiddenOption">移除</button>' +
+					'</div>' +
+				'</div>' +
+
+				'<div id="option-list" class="option-row">' +
+				'</div>';
+var option_2 = '';
+var option_3_title =  '<div class="option-title ">' +
+					'<div class="option-text" >填空文字说明</div>' +
+				'</div>';
+var option_3 =	
+				'<div id="option_hidden" style="display: none;" class="option-row">' +
+					'<div class="col-md-6 col-xs-12 col-lg-6 option-input-div">' +
+						'<input class="topic-option-fill-desc" ></input>' +
+						'<input class="topic-option-fill-line" disabled></input>' +
+					'</div>' +
+					'<div class="col-md-3 col-xs-12 col-lg-3">' +
+						'<button class="btn btn-warning" type="button" id="cloneHiddenOption">增加</button>' +
+						'<button class="btn btn-danger" type="button" id="removeHiddenOption">移除</button>' +
+					'</div>' +
+				'</div>' +
+	
+				'<div id="option-list" class="option-row">' +
+				'</div>';
+
+var option_4_title = '<div class="option-title">' +
+					'<div class="option-text-table" >选项文字</div>' +
+					'<div class="option-text-table" >分数</div>' +
+				'</div>';
+var option_4 = 
+				'<div id="option_hidden" style="display: none;" class="option-row">' +
+					'<div class="col-md-6 col-xs-12 col-lg-6 option-input-div">' +
+						'<input class="topic-option-table" ></input>' +
+						'<input class="topic-option-value" ></input>' +
+					'</div>' +
+					'<div class="col-md-3 col-xs-12 col-lg-3">' +
+						'<button class="btn btn-warning" type="button" id="cloneHiddenOption">增加</button>' +
+						'<button class="btn btn-danger" type="button" id="removeHiddenOption">移除</button>' +
+					'</div>' +
+				'</div>' +
+
+				'<div id="option-list" class="option-row">' +
+				'</div>';
+var option_5_title = '<div class="option-title">' +
+					'<div class="option-text" >下拉框选择文字说明</div>' +
+				'</div>';
+var option_5 = 				
+				'<div id="option_hidden" style="display: none;" class="option-row">' +
+					'<div class="col-md-6 col-xs-12 col-lg-6 option-input-div">' +
+						'<input class="topic-option-input" ></input>' +
+					'</div>' +
+					'<div class="col-md-3 col-xs-12 col-lg-3">' +
+						'<button class="btn btn-warning" type="button" id="cloneHiddenOption">增加</button>' +
+						'<button class="btn btn-danger" type="button" id="removeHiddenOption">移除</button>' +
+					'</div>' +
+				'</div>' +
+
+				'<div id="option-list" class="option-row">' +
+				'</div>';
+var option_6_title = '<div class="option-title ">' +
+					'<div class="option-text" >上传文件描述</div>' +
+				'</div>';
+var option_6 = 
+				'<div id="option_hidden" style="display: none;" class="option-row">' +
+					'<div class="col-md-6 col-xs-12 col-lg-6 option-input-div">' +
+						'<input class="topic-option-input" ></input>' +
+					'</div>' +
+					'<div class="col-md-3 col-xs-12 col-lg-3">' +
+						'<input type="file" >' +
+					'</div>' +
+					'<div class="col-md-3 col-xs-12 col-lg-3">' +
+						'<button class="btn btn-warning" type="button" id="cloneHiddenOption">增加</button>' +
+						'<button class="btn btn-danger" type="button" id="removeHiddenOption">移除</button>' +
+					'</div>' +
+				'</div>' +
+	
+				'<div id="option-list" class="option-row">' +
+				'</div>';
+</script>
+</html>

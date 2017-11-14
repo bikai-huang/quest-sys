@@ -1,0 +1,158 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" class="gr__wjx_cn"><head id="Head1"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>
+	北京师范大学问卷系统新增用户
+</title><meta content="北京师范大学问卷系统" name="keywords">
+       <link rel="stylesheet" href="./css/index.css" type="text/css">
+       <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+       <script type="text/javascript" src="./js/common.js"></script>
+
+       <link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
+
+       <link rel="stylesheet" type="text/css" href="./css/wjxmaster.css">
+
+    <style>
+        .divAnti input {
+            width: 140px !important;
+            padding-left: 16px !important;
+            border: none;
+            height: 46px !important;
+            line-height:46px !important;
+            font-size: 14px;
+            padding-left: 46px;
+            border-radius: 100px;
+            border: 1px solid #e6e6e6;
+            float: left !important;
+        }
+
+        .roleType{
+            width: 100%;
+            font-size: 18px;
+            height: 48px;
+        }
+    </style>
+</head>
+
+<body>
+
+        <div id="BS" style="background: #FFFFFF;" >
+            </div>
+            <script>
+                getHeaderHtml();
+            </script>
+
+<div id="divSojump" class="validate-box" style="margin-top: -300px;">
+    <fieldset class="validate-wrapper">
+        <legend class="validate-caption">新增用户</legend>
+        <ul>
+            <li>
+                <label for="login" class="icon user-icon"></label>
+                <input id="login" placeholder="请输入系统登录账户名" class="validate-input login" type="text" onfocus="if(value==&#39;请输入系统登录账户名&#39;){value=&#39;&#39;;}" onblur="if(value==&#39;&#39;){value=&#39;请输入系统登录账户名&#39;}">
+                <div class="divclear"></div>
+            </li>
+            
+            <li id="roleSelect">
+                <select name="roleType" class="roleType">
+                    <option value="1">管理员</option>
+                    <option value="2" selected>问卷系统用户</option>
+                </select>
+            </li>
+
+            <li>
+                <label for="realname" class="icon user-icon"></label>
+                <input id="realname" placeholder="请输入真实姓名" class="validate-input realname" type="text" onfocus="if(value==&#39;请输入真实姓名&#39;){value=&#39;&#39;;}" onblur="if(value==&#39;&#39;){value=&#39;请输入真实姓名&#39;}">
+                <div class="divclear"></div>
+            </li>
+
+            <li>
+                <label for="email" class="icon user-icon"></label>
+                <input id="email" placeholder="请输入用户email" class="validate-input email" type="text" onfocus="if(value==&#39;请输入用户email&#39;){value=&#39;&#39;;}" onblur="if(value==&#39;&#39;){value=&#39;请输入用户email&#39;}">
+                <div class="divclear"></div>
+            </li>
+
+            <li>
+                <label for="phone" class="icon user-icon"></label>
+                <input id="phone" placeholder="请输入用户手机号码" class="validate-input phone" type="text" onfocus="if(value==&#39;请输入用户手机号码&#39;){value=&#39;&#39;;}" onblur="if(value==&#39;&#39;){value=&#39;请输入用户手机号码&#39;}">
+                <div class="divclear"></div>
+            </li>
+
+            <li>
+                <label for="origination" class="icon user-icon"></label>
+                <input id="origination" placeholder="请输入单位名" class="validate-input origination" type="text" onfocus="if(value==&#39;请输入单位名&#39;){value=&#39;&#39;;}" onblur="if(value==&#39;&#39;){value=&#39;请输入单位名&#39;}">
+                <div class="divclear"></div>
+            </li>
+            
+             <li>
+                <label for="department" class="icon user-icon"></label>
+                <input id="department" placeholder="请输入部门" class="validate-input department" type="text" onfocus="if(value==&#39;请输入部门&#39;){value=&#39;&#39;;}" onblur="if(value==&#39;&#39;){value=&#39;请输入部门&#39;}">
+                <div class="divclear"></div>
+            </li>
+            
+        </ul>
+
+    </fieldset>
+    <fieldset class="submit-wrapper" style="text-align: center; margin-top: 20px;">
+        <input type="submit" value="保存用户" id="resetPassword" onclick="resetPassword();" class="submitbutton" onmouseover="this.className=&#39;submitbutton submitbutton_hover&#39;;" onmouseout="this.className=&#39;submitbutton&#39;;" style="color:White;">
+    </fieldset>
+</div>
+</body>
+<script>
+
+var userRole = localStorage.getItem('roleType');
+$(function () {
+    if(userRole==0) {
+        var html = '<select name="roleType" class="roleType">';
+        html += '<option value="1">管理员</option>'
+        html += '<option value="2" selected>问卷系统用户</option>';
+        html += '</select>';
+        // $('#roleSelect').append(html);
+    }
+});
+
+function resetPassword() {
+    var login = $('#login').val();
+    var realname = $('#realname').val();
+    var email = $('#email').val();
+    var phone = $('#phone').val();
+    var origination = $('#origination').val();
+    var department = $('#department').val();
+
+    var roleType = 1;
+
+    if(userRole==0) {
+        roleType = $('select[name="roleType"]').val();
+    }
+
+    if(!login) {
+        alert('请输入系统登录账户名.');
+        return;
+    }
+    if(!realname) {
+        alert('请输入真实姓名.');
+        return;
+    }
+    
+    $.ajax({
+			url: host + '/api/a/addUser/',
+			type: "GET",
+			dataType: "json", 
+			data: {token: token, login: login, realname: realname, email: email, phone: phone, origination: origination, department: department, roleType: roleType},
+			cache: false,
+			success: function(result) {
+				console.log(result.paperList)
+				if (result.state == 200) {
+                    alert('保存用户成功！');
+                    location.href = 'user-list.html';
+				} else {
+					alert(result.data.error);
+				}
+			},
+			error: function(XMLHttpRequest, textStatus, errorThrown) {
+												
+      		}
+		});
+
+}
+</script>
+
+</html>

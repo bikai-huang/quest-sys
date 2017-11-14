@@ -1,0 +1,264 @@
+﻿/* 外围5 倒入问卷文本 style START  */
+.import-wrapper {
+	margin: 40px 0 0;
+}
+.main-wrapper .import-box{
+	margin: 0;
+	text-align: left;
+    border-radius: 8px;
+	border: 1px solid #dedfe0;
+}
+.main-wrapper .import-box .importLf-wrapper {
+	width: 45%;
+	background-color: #f7f8f9;
+	border-top-left-radius: 8px;
+}
+.main-wrapper .import-box .importLf-wrapper .importLf-header {
+	overflow: hidden;
+	padding: 0 30px;
+}
+.main-wrapper .import-box .importLf-wrapper .importLf-header .importLf-title {
+	font-size: 14px;
+	color: #30a6f5;
+	line-height: 42px;
+}
+.main-wrapper .import-box .importLf-wrapper .importLf-header .importLf-title .copy-icon {
+	background: url("/Images/newimg/pic-5/copy.png") no-repeat center;
+}
+.main-wrapper .import-box .importLf-wrapper .importLf-header .clear-text {
+	font-size: 14px;
+    color: #30a6f5;
+    width: 75px;
+    height: 24px;
+    line-height: 1.5;
+	margin-top: 9px;
+    background-color: #f7f8f9;
+    padding: 0;
+}
+.main-wrapper .import-box .importRf-wrapper .importRf-set .edit-file:hover,
+.main-wrapper .import-box .importLf-wrapper .importLf-header .clear-text:hover {
+	color: #fff;
+	border-color: #30a6f5;
+	background-color: #30a6f5;
+}
+.main-wrapper .import-box .importLf-wrapper .importLf-textarea {
+	font-size: 12px;
+	color: #333333;
+	width: 100%;
+    *width:96%;
+	height:644px;
+	padding: 30px 0 30px 30px;
+	overflow: auto;
+	border: none;
+	border-top: 1px solid #dedfe0;
+	border-bottom: 1px solid #dedfe0;
+	background-color: #f7f8f9;
+    line-height: 30px;
+    vertical-align: middle;
+    font-size: 14px;
+}
+.main-wrapper .import-box .importLf-wrapper .confirm-preview {
+	padding: 0 30px;
+	clear: both;
+	height: 50px;
+	
+}
+
+.main-wrapper .import-box .importLf-wrapper .confirm-preview .confirm-sub {
+	overflow: hidden;
+	height: 50px;
+	line-height: 50px;
+}
+.main-wrapper .import-box .importLf-wrapper .confirm-preview .confirm-sub:hover a {
+	color: #30a6f5;
+}
+.main-wrapper .import-box .importLf-wrapper .confirm-preview .confirm-sub:hover .text-icon {
+	background: url("/Images/newimg/pic-5/text-hover.png") no-repeat center;
+}
+.main-wrapper .import-box .importLf-wrapper .confirm-preview .confirm-sub > a {
+	font-size: 14px;
+	color: #333333;
+	text-decoration: underline;
+}
+.main-wrapper .import-box .importLf-wrapper .confirm-preview .confirm-sub .text-icon {
+	background: url("/Images/newimg/pic-5/text.png") no-repeat center;
+}
+.main-wrapper .import-box .importLf-wrapper .confirm-preview #cbKaoShi,
+.main-wrapper .import-box .importLf-wrapper .confirm-preview #cbEnglish {
+	position: relative;
+    top: 2px;
+	overflow: hidden;
+	width: 12px;
+	height: 12px;
+	margin-right: 6px;
+}
+.main-wrapper .import-box .importLf-wrapper .confirm-preview .exam-box {
+	line-height: 42px;
+	font-size: 14px;
+	color: #333333;
+	margin-left: 20px;
+}
+.main-wrapper .import-box .importRf-wrapper {
+	position: relative;
+	width: 55%;
+	border-left: 1px solid #dedfe0
+}
+.main-wrapper .import-box .importRf-wrapper .importRf-header {
+	position: relative;
+	padding: 0 30px;
+}
+.main-wrapper .import-box .importRf-wrapper .importRf-header .edit-box,
+.main-wrapper .import-box .importRf-wrapper .importRf-header .preview-box {
+	font-size: 14px;
+	color: #333333;
+	line-height: 42px;
+}
+.main-wrapper .import-box .importRf-wrapper .importRf-header .edit-box .compile-icon {
+	background: url("/Images/newimg/pic-5/compile.png") no-repeat center;
+}
+.main-wrapper .import-box .importRf-wrapper .importRf-header .edit-box:hover,
+.main-wrapper .import-box .importRf-wrapper .importRf-header .preview-box:hover {
+	color: #30a6f5;
+}
+.main-wrapper .import-box .importRf-wrapper .importRf-header .edit-box:hover .compile-icon  {
+	background: url("/Images/newimg/pic-5/compile-hover.png") no-repeat center;
+}
+.main-wrapper .import-box .importRf-wrapper .importRf-header .preview-box .preview-icon {
+	background: url("/Images/newimg/pic-5/preview.png") no-repeat center;
+}
+.main-wrapper .import-box .importRf-wrapper .importRf-header .preview-box:hover .preview-icon  {
+	background: url("/Images/newimg/pic-5/preview-hover.png") no-repeat center;
+}
+.main-wrapper .import-box .importLf-wrapper .importLf-header .importLf-title .copy-icon,
+.main-wrapper .import-box .importLf-wrapper .confirm-preview .confirm-sub .text-icon,
+.main-wrapper .import-box .importRf-wrapper .importRf-header .edit-box .compile-icon,
+.main-wrapper .import-box .importRf-wrapper .importRf-header .preview-box .preview-icon {
+	width: 18px;
+	height: 18px;
+	margin-right: 10px;
+}
+.main-wrapper .import-box .importLf-wrapper .importLf-header .importLf-title .copy-icon {
+	margin-right: 6px;
+}
+.main-wrapper .import-box .importRf-wrapper .survey-body {
+	overflow-y: auto;
+	height: 680px;
+	padding: 0;
+}
+.main-wrapper .import-box .importRf-wrapper .survey-body .survey-header {
+	text-align: center;
+	border-bottom: 1px dashed #dedfe0;
+}
+.main-wrapper .import-box .importRf-wrapper .survey-body .importRf-survey {
+
+}
+.main-wrapper .import-box .importRf-wrapper .survey-body .survey-header h1 {
+	font-size: 20px;
+	color: #333333;
+	margin: 10px 0 5px;
+}
+.main-wrapper .import-box .importRf-wrapper .survey-body .survey-header .survey-desc {
+	font-size: 14px;
+	text-align: left;
+	padding-left: 10px;
+}
+.main-wrapper .import-box .importRf-wrapper .importRf-set {
+	height: 56px;
+	text-align: center;
+    background-color: #fff;
+}
+.main-wrapper .import-box .importRf-wrapper .importRf-set > * {
+	display: inline-block;
+	width: 120px;
+	height: 38px;
+	font-size: 18px;
+	margin:10px 8px 0;
+    line-height:38px;
+}
+.main-wrapper .import-box .importRf-wrapper .importRf-set .edit-file {
+	color: #30a6f5;
+	background-color: #fff;
+}
+.main-wrapper .import-box .remind-footer {
+	overflow: hidden;
+	font-size: 12px;
+	color: #808080;
+	height: 42px;
+	line-height: 42px;
+	padding: 0 30px;
+	border-top: 1px solid #dedfe0;
+	background-color: #f7f8f9;
+	border-bottom-left-radius: 8px;
+	border-bottom-right-radius: 8px;
+}
+.main-wrapper .import-box .remind-footer .special-icon {
+	width: 18px;
+	height: 18px;
+	margin-top: 12px;
+	margin-right: 10px;
+	background: url("/Images/newimg/prompt.png") no-repeat center;
+}
+.main-wrapper .import-box .remind-footer p {
+	width: 96%;
+}
+@media (max-width: 1096px) {
+	.main-wrapper .import-box .remind-footer {
+		line-height: 1.8;
+		height: 58px;
+	}
+	.main-wrapper .import-box .remind-footer p {
+		width: 90%;
+		margin-top: 8px;
+	}
+}
+.tbgrid td, .tbgrid th {
+    border: 1px solid #DCE0E1;
+}
+/* 覆盖q.css中的样式START */
+.div_question {
+	border: none;
+    clear: both;
+	width: 100%;
+	margin: 0;
+	padding: 0 0 0 20px;
+}
+.div_title_question_all {
+	font-size: 14px;
+	color: #333333;	
+	padding-top: 20px;
+}
+.div_table_radio_question {
+	font-size: 14px;
+	padding-top: 10px;
+	padding-bottom: 0;
+}
+.div_table_radio_question li {
+	margin-bottom: 10px;
+}
+/* 覆盖q.css中的样式END */
+
+@media (min-width: 1280px) {
+	.main-wrapper .import-box .importLf-wrapper .importLf-textarea {
+		height: 468px;
+	}
+	.main-wrapper .import-box .importRf-wrapper .survey-body {
+		height: 504px;
+	}
+}
+@media (min-width: 1366px) {
+	.main-wrapper .import-box .importLf-wrapper .importLf-textarea {
+		height: 564px;
+	}
+	.main-wrapper .import-box .importRf-wrapper .survey-body {
+		height: 600px;
+	}
+}
+@media (min-width: 1920px) {
+	.main-wrapper .import-box .importLf-wrapper .importLf-textarea {
+		height: 644px;
+	}
+	.main-wrapper .import-box .importRf-wrapper .survey-body {
+		height: 680px;
+	}
+}
+/* 外围5 倒入问卷文本 style END  */

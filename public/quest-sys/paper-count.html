@@ -1,0 +1,179 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>北京师范大学问卷系统--统计分析</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="images/white-logo.png">
+  <link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+  <script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="./js/common.js"></script></head>
+  
+<style>
+body{
+	background-color: #33CCFF;
+}
+
+textarea{
+	width: 100%;
+}
+
+.paper-title{
+	color: #1874CD;
+	text-align: center;
+	font-size: 24px;
+	margin-top: 30px;
+	margin-bottom: 30px;
+}
+
+.container{
+	background-color: white;
+	margin: 7% 6% 10%;
+}
+.topic-desc{
+	font-weight: bold;
+}
+.split-line{
+	height: 5px;
+	border-bottom: 1px solid #FAF0E6;
+	margin-bottom: 30px;
+}
+.count{
+	margin-right: 40px;
+}
+.answer{
+	
+}
+</style>
+<body >
+		<div id="BS" style="background: #FFFFFF;" >
+            </div>
+            <script>
+                getHeaderHtml();
+			</script>
+			
+<div class="container">
+    	<div class="col-md-3 col-xs-12 col-lg-3" >
+    	</div>
+		<div class="col-md-6 col-xs-12 col-lg-6 content" >
+    		<div class="paper-title"></div>
+    		<div class="paper-desc"></div>
+    		
+    		<div class="paper-content">
+    		</div>
+		</div>
+		<div class="col-md-3 col-xs-12 col-lg-3" >
+    	</div>
+    </div>
+</body>
+<script type="text/javascript" >
+
+var id = getvl('id');
+$(function () {
+	getPaper();
+});
+
+function getPaper() {
+    	$.ajax({
+			url: host + '/api/a/getPaper',
+			type: "GET",
+			dataType: "json", 
+			data: {token: token, id: id},
+			cache: false,
+			success: function(result) {
+				console.log(result.paperList)
+				if (result.state == 200) {
+					$('.paper-title').html(result.data.title);
+					$('.paper-desc').html(result.data.desc);
+					var html = '';
+					$.each(result.data.topics, function(i, item) {
+						html += '<p class="topic-desc">' + item.tdesc + '</p>';
+						// if (item.ttype == 0 || item.ttype == 1) {
+						// 	$.each(item.options, function(i, opItem) {
+						// 		if (item.ttype == 0) {
+						// 			html += '<div class="radio"><label>';
+						// 			html += '<span class="count">小计: ' + opItem.ocount + '</span><input type="radio" disabled>' + opItem.odesc;
+						// 		} else if(item.ttype == 1) {
+						// 			html += '<div class="checkbox"><label>';
+						// 			html += '<span class="count">小计: ' + opItem.ocount + '</span><input type="checkbox" disabled>' + opItem.odesc;
+						// 		} 
+						// 		html += '</label></div>';
+						// 	});
+						// } else if(item.ttype == 2) {
+							
+						// 	for(var p=0; p< item.tanswer.length; p++) {
+						// 		html += '<p>';
+						// 		html += item.tanswer[p].user_answer;
+						// 		html += '</p>';
+						// 	} 
+							
+						// }
+
+						if (item.ttype == 0) {
+							$.each(item.options, function(i, opItem) {
+								html += '<div class="radio"><label>';
+								html += '<span class="count">小计: ' + opItem.ocount + '</span><input type="radio" disabled>' + opItem.odesc;
+								html += '</label></div>';
+							});
+						} else if(item.ttype == 1) {
+							$.each(item.options, function(i, opItem) {
+								html += '<div class="checkbox"><label>';
+								html += '<span class="count">小计: ' + opItem.ocount + '</span><input type="checkbox" disabled>' + opItem.odesc; 
+								html += '</label></div>';
+							});
+						} else if(item.ttype == 2) {
+							for(var p = 0; p < item.tanswer.length; p++) {
+								html += '<p>';
+								html += item.tanswer[p].user_answer;
+								html += '</p>';
+							}
+						} else if(item.ttype == 3) {
+							$.each(item.options, function(i, opItem) {
+								html += '<div class="checkbox"><label>';
+								html += '<span class="count">' + opItem.odesc + '</span>'; 
+								for(var p=0; p< opItem.oanswer.length; p++) {
+									html += '<p>';
+									html += opItem.oanswer[p].user_answer;
+									html += '</p>';
+								}
+								html += '</div>';
+							});
+							
+						} else if(item.ttype == 4) {//量表题
+							$.each(item.options, function(i, opItem) {
+								html += '<div class="radio"><label>';
+								html += '<span class="count">小计: ' + opItem.ocount + '</span><input type="radio" disabled>' + opItem.odesc;
+								html += '</label></div>';
+							});
+						} else if(item.ttype == 5) {//下拉框
+							$.each(item.options, function(i, opItem) {
+								html += '<div class="radio"><label>';
+								html += '<span class="count">小计: ' + opItem.ocount + '</span><input type="radio" disabled>' + opItem.odesc;
+								html += '</label></div>';
+							});
+						} else if(item.ttype == 6) {
+							for(var p = 0; p < item.tanswer.length; p++) {
+								html += '<p>';
+								html += item.tanswer[p].user_answer;
+								html += '</p>';
+							}
+						}
+
+						html += '<div class="split-line"></div>';
+          			});
+          			$('.paper-content').append(html);
+				} else {
+					alert(result.data.error);
+				}
+			},
+			error: function(XMLHttpRequest, textStatus, errorThrown) {
+												
+      		}
+		});
+    }
+
+
+</script>
+</html>

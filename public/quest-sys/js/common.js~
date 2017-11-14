@@ -1,0 +1,7 @@
+var host = 'https://college-quest-sys-minzuxiwang.c9users.io';
+
+var token = localStorage.getItem('token');
+
+function logout() {
+	localStorage.setItem('token', '');
+}
