@@ -18,17 +18,42 @@ body{
 	background-color: white;
 	margin: 7% 6% 10%;
 	text-align: center;
-	height: 80%;
-	overflow: auto;
+	height: 70%;
+	margin-top:100px;
+	position:relative;
 }
 .thanks{
-	height: 400px;
-	padding: 40px;
+	height: 196px;
+  margin-top: 160px;
+  text-align: center;
+}
+.thanksImg{
+  width: 140px;
+  height: 125px;
+  position: absolute;
+  background: url(img/thanks.png);
+  background-size: cover;
+  left: 50%;
+  margin-left: -70px;
+  top: -26px;
+}
+.submitInfo{
+	font-size:14px;
+	color: #8D8D8D;
+}
+.join{
+	font-size: 24px;
+	color: #1198FF;
+	letter-spacing: 1.33px;
 }
 </style>
 <body>
 <div class="container">
-	<div class="thanks">感谢您的热情参与，谢谢!</div>
+	<div class="thanksImg"></div>
+	<div class="thanks">
+		<p class="submitInfo">问卷提交成功</p>
+		<p class="join">感谢您的参与！</p>
+	</div>
 </div>
 </body>
 </html>

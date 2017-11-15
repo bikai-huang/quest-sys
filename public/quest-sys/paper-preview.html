@@ -13,7 +13,7 @@
   
 <style>
 body{
-	background-color: #33CCFF;
+	background-image: linear-gradient(-180deg, #7CC4FB 0%, #319FF4 100%);
 }
 
 textarea{
@@ -21,16 +21,26 @@ textarea{
 }
 
 .paper-title{
-	color: #1874CD;
 	text-align: center;
-	font-size: 24px;
 	margin-top: 30px;
 	margin-bottom: 30px;
+	font-size: 18px;
+	color: #1198FF;
 }
-
+.paper-desc{
+	font-size: 14px;
+	color: #8D8D8D;
+	line-height: 24px;
+	padding-bottom: 32px;
+	border-bottom:2px solid #E0E6EA;
+	margin-bottom: 40px;
+}
 .container{
 	background-color: white;
 	margin: 7% 6% 10%;
+	padding-top:50px;
+	height:80%;
+	padding:0;
 }
 .topic-desc{
 	font-weight: bold;
@@ -43,12 +53,9 @@ textarea{
 
 .topic-option-fill-line {
 	width: auto;
-	border: 0;
-	border-bottom: 1px solid #909ba7;
+	/*border-bottom: 1px solid #909ba7;*/
 	margin-left: 10px;
 }
-
-
 .count {
   position: relative;
   width: 20px;
@@ -84,18 +91,66 @@ textarea{
 .count:checked::after {
   background-color: #27AE60;
 }
+.text{
+	width:60%;
+	height:40px;
+	padding-left:5px;
+}
+.userinfo{
+	margin: 20px 0;
+	height:34px;
+	text-align: center;
+}
+.btn{
+	width:60%;
+	height:35px;
+}
+.button{
+	margin-left:20.5%;
+	margin-bottom:80px;
+}
+input{
+	background: #FFFFFF;
+	border: 1px solid #E0E6EA;
+	border-radius: 3px;
+}
+.submit{
+	height:240px;
+	background: #E9F5FF;
+	padding-top:20px;
+}
+.contentBlock{
+	height:auto;
+	padding-left:20%;
+	padding-right:20%;
+	padding-top:30px;
+}
 </style>
 <body >
 	<div class="container">
-    	<div class="col-md-4 col-xs-12 col-lg-4" >
-    	</div>
-		<div class="col-md-4 col-xs-12 col-lg-4 content" >
-    		<div class="paper-title"></div>
-    		
-    		<div class="paper-content">
-    		</div>
-    	</div>
-    </div>	
+		<div class="contentBlock">
+			<!-- <div class="col-md-4 " >
+	  	</div> -->
+			<div class=" content" >
+	    		<div class="paper-title"></div>
+	    		<div class="paper-desc"></div>
+	    		
+	    		<div class="paper-content">
+	    		</div>
+			</div>
+			<!-- <div class="col-md-4 " >
+	    </div> -->
+		</div>
+		<div class="submit">
+			<div class="userinfo">
+				<input type="text" class="topic-option-fill-line text" id="email" placeholder="请留下您的Email" disabled/>
+			</div>
+			<div class="userinfo">
+				<input type="text" class="topic-option-fill-line text" id="telephone" placeholder="请留下您的手机号" disabled/>
+			</div>
+			<button class="button btn btn-primary" type="button" disabled>提交</button>
+		</div>
+  </div>
 </body>
 <script type="text/javascript" >
 var id = getvl('id');
@@ -114,6 +169,7 @@ function getPaper() {
 				console.log(result.paperList)
 				if (result.state == 200) {
 					$('.paper-title').html(result.data.title);
+					$('.paper-desc').html(result.data.desc);
 					var html = '';
 					$.each(result.data.topics, function(i, item) {
 
@@ -121,24 +177,24 @@ function getPaper() {
 							html += '<p class="topic-desc">' + item.tdesc + '</p>';
 							$.each(item.options, function(i, opItem) {
 								html += '<div class="radio"><label>';
-								html += '<input type="radio" >' + opItem.odesc;
+								html += '<input type="radio" disabled>' + opItem.odesc;
 								html += '</label></div>';
 							});
 						} else if(item.ttype == 1) {
 							html += '<p class="topic-desc">' + item.tdesc + '</p>';
 							$.each(item.options, function(i, opItem) {
 								html += '<div class="checkbox"><label>';
-								html += '<input type="checkbox" >' + opItem.odesc; 
+								html += '<input type="checkbox" disabled>' + opItem.odesc; 
 								html += '</label></div>';
 							});
 						} else if(item.ttype == 2) {
 							html += '<p class="topic-desc">' + item.tdesc + '</p>';
-							html += '<textarea ></textarea >';
+							html += '<textarea disabled></textarea >';
 						} else if(item.ttype == 3) {
 							html += '<p class="topic-desc">' + item.tdesc + '</p>';
 							$.each(item.options, function(i, opItem) {
 								html += '<div class=""><label>';
-								html += opItem.odesc + ': <input type="text" class="topic-option-fill-line" >'; 
+								html += opItem.odesc + ': <input type="text" class="topic-option-fill-line" disabled>'; 
 								html += '</label></div>';
 							});
 						} else if(item.ttype == 4) {//量表题
@@ -146,11 +202,11 @@ function getPaper() {
 							$.each(item.options, function(i, opItem) {
 								html += '';
 								if(i==0) {
-									html += opItem.odesc + '<input type="radio" class="count" value="' + i + '" >' + opItem.point; 
+									html += opItem.odesc + '<input type="radio" class="count" value="' + i + '" disabled>' + opItem.point; 
 								} else if(i==item.options.length-1) {
-									html += '<input type="radio" class="count" >' + opItem.point + ' ' + opItem.odesc; 
+									html += '<input type="radio" class="count" disabled>' + opItem.point + ' ' + opItem.odesc; 
 								} else {
-									html += '<input type="radio" class="count" >' + opItem.odesc; 
+									html += '<input type="radio" class="count" disabled>' + opItem.odesc; 
 								}
 								
 								html += '';
@@ -171,14 +227,6 @@ function getPaper() {
 
 						html += '<div class="split-line"></div>';
           			});
-					html += '<div class="userinfo">';
-					html += '<input type="text" class="" id="email" placeholder="email" />';
-					html += '<input type="text" class="" id="telephone" placeholder="telephone" />';
-					html += '</div=>';
-					html += '<div class="btn">';
-					html += '<button class="btn btn-primary main-banner-btn" type="button" id="btn">';
-					html += '提交</button>';
-					html += '</div><br><br><br>';
       		
           		$('.paper-content').append(html);
 				} else {

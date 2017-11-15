@@ -845,7 +845,7 @@ button.close {
 }
 @media (min-width: 1366px) {
 .container {
-	width: 1246px;
+	/*width: 1246px;*/
 	padding-right: 0;
 	padding-left: 0;
 }

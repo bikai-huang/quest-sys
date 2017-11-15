@@ -13,7 +13,7 @@
   
 <style>
 body{
-	background-color: #33CCFF;
+	background-image: linear-gradient(-180deg, #7CC4FB 0%, #319FF4 100%);
 }
 
 textarea{
@@ -21,16 +21,26 @@ textarea{
 }
 
 .paper-title{
-	color: #1874CD;
 	text-align: center;
-	font-size: 24px;
 	margin-top: 30px;
 	margin-bottom: 30px;
+	font-size: 18px;
+	color: #1198FF;
 }
-
+.paper-desc{
+	font-size: 14px;
+	color: #8D8D8D;
+	line-height: 24px;
+	padding-bottom: 32px;
+	border-bottom:2px solid #E0E6EA;
+	margin-bottom: 40px;
+}
 .container{
 	background-color: white;
 	margin: 7% 6% 10%;
+	padding-top:50px;
+	height:80%;
+	padding:0;
 }
 .topic-desc{
 	font-weight: bold;
@@ -43,12 +53,9 @@ textarea{
 
 .topic-option-fill-line {
 	width: auto;
-	border: 0;
-	border-bottom: 1px solid #909ba7;
+	/*border-bottom: 1px solid #909ba7;*/
 	margin-left: 10px;
 }
-
-
 .count {
   position: relative;
   width: 20px;
@@ -85,26 +92,65 @@ textarea{
   background-color: #27AE60;
 }
 .text{
-	width:100%;
+	width:60%;
+	height:40px;
+	padding-left:5px;
 }
 .userinfo{
-	margin: 10px 0;
+	margin: 20px 0;
+	height:34px;
+	text-align: center;
+}
+.btn{
+	width:60%;
+	height:35px;
+}
+.button{
+	margin-left:20.5%;
+	margin-bottom:80px;
+}
+input{
+	background: #FFFFFF;
+	border: 1px solid #E0E6EA;
+	border-radius: 3px;
+}
+.submit{
+	height:240px;
+	background: #E9F5FF;
+	padding-top:20px;
+}
+.contentBlock{
+	height:auto;
+	padding-left:20%;
+	padding-right:20%;
+	padding-top:30px;
 }
 </style>
 <body >
 <div class="container">
-    	<div class="col-md-4 col-xs-12 col-lg-4" >
-    	</div>
-		<div class="col-md-4 col-xs-12 col-lg-4 content" >
+	<div class="contentBlock">
+		<!-- <div class="col-md-4 " >
+  	</div> -->
+		<div class=" content" >
     		<div class="paper-title"></div>
     		<div class="paper-desc"></div>
     		
     		<div class="paper-content">
     		</div>
 		</div>
-		<div class="col-md-4 col-xs-12 col-lg-4" >
-    	</div>
-    </div>
+		<!-- <div class="col-md-4 " >
+    </div> -->
+	</div>
+	<div class="submit">
+		<div class="userinfo">
+			<input type="text" class="topic-option-fill-line text" id="email" placeholder="请留下您的Email" />
+		</div>
+		<div class="userinfo">
+			<input type="text" class="topic-option-fill-line text" id="telephone" placeholder="请留下您的手机号" />
+		</div>
+		<button class="button btn btn-primary" type="button" onclick="savePaper();">提交</button>
+	</div>
+</div>
 </body>
 <script type="text/javascript" >
 
@@ -190,14 +236,6 @@ function getPaper() {
 
 						html += '<div class="split-line"></div>';
           			});
-					html += '<div class="userinfo"><input type="text" class="topic-option-fill-line text" id="email" placeholder="email" /></div>';
-					html += '<div class="userinfo"><input type="text" class="topic-option-fill-line text" id="telephone" placeholder="telephone" />';
-					html += '</div>';
-					html += '<div class="btn">';
-					html += '<button class="btn btn-primary main-banner-btn" type="button" onclick="savePaper();">';
-					html += '提交</button>';
-					html += '</div><br><br><br>';
-      		
           		$('.paper-content').append(html);
 				} else {
 					alert(result.data.error);
@@ -214,14 +252,24 @@ var startTime = new Date();
 	function savePaper() {
 		var checkin = true;
 		var email = $('#email').val();
+		var regEmail = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/ 
 		if(!email) {
 			alert('请留下您宝贵的邮箱地址！');
 			checkin = false;
 			return;
+		}else if(!regEmail.test(email)){
+			alert('请输入正确的邮箱格式')
+			checkin = false;
+			return;
 		}
 		var telephone = $('#telephone').val();
+		var regphone = /^1[34578]\d{9}$/
 		if(!telephone) {
 			alert('请留下您宝贵的手机号码！');
+			checkin = false;
+			return;
+		}else if(!regphone.test(telephone)){
+			alert('请输入正确的手机号码')
 			checkin = false;
 			return;
 		}
