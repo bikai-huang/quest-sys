@@ -37,19 +37,21 @@
             </a>
 
         </div>
-            <div class="fullpage-main"></div>
+            <!-- <div class="fullpage-main"></div> -->
             <div id="divSojump" class="validate-box">
                 <fieldset class="validate-wrapper">
-                    <legend class="validate-caption">用户登录</legend>
+                    <!-- <legend class="validate-caption">用户登录</legend> -->
+                    <div class="questionLogo"><img src="./css/img/questionnaireIcon.png" alt="" /></div>
+                    <div class="questionText"><img src="./css/img/LOGO.png" alt=""/></div>
                     <ul>
                         <li>
                             <label for="user-name" class="icon user-icon"></label>
-                            <input name="login" id="UserName" placeholder="用户名/Email/手机" class="validate-input user-name" type="text" onfocus="if(value==&#39;用户名/Email/手机&#39;){value=&#39;&#39;;}" onblur="if(value==&#39;&#39;){value=&#39;用户名/Email/手机&#39;}">
+                            <input name="login" id="UserName" placeholder="用户名/手机号/Email" class="validate-input user-name" type="text" onfocus="if(value==&#39;用户名/手机号&#39/Email;){value=&#39;&#39;;}" onblur="if(value==&#39;&#39;){value=&#39;用户名/手机号&#39/Email;}">
                             <div class="divclear"></div>
                         </li>
                         <li>
                             <label for="password" class="icon password-icon"></label>
-                            <input name="password" type="password" id="Password" placeholder="请输入登录密码" class="validate-input">
+                            <input name="password" type="password" id="Password" placeholder="密码" class="validate-input">
                         </li>
                         
                         
@@ -57,25 +59,39 @@
                     </ul>
                     <div id="trRemember" class="remember-box">
                         <span class="automatic-box pull-left">
-                            <span class="login_checkbox centertxt"><input id="RememberMe" type="checkbox" name="RememberMe"></span>下次自动登录 
+                            <span class="checklist iCheck"><input id="RememberMe" type="checkbox" name="RememberMe" class="checkbox"></span>下次自动登录 
                         </span>
-                        <a id="PasswordRecoveryLink" class="get-back pull-right" href="#" >忘记用户名/密码？</a>
+                        <a id="PasswordRecoveryLink" class="get-back pull-right" href="forget.html" >忘记用户名/密码？</a>
                     </div>
                 </fieldset>
                 <fieldset class="submit-wrapper" style="text-align: center; margin-top: 20px;">
                     <input type="submit" name="LoginButton" value="登 录" id="LoginButton" class="submitbutton" onmouseover="this.className=&#39;submitbutton submitbutton_hover&#39;;" onmouseout="this.className=&#39;submitbutton&#39;;" style="color:White;">
                     <span style="color: red; line-height: 28px;">
-                        </span>
+                    </span>
+                    <button class="weChatLogin"><i class="weLogo"></i><span>微信登录</span></button>
+
+
                     <a href="#" id="hrefRegister" title="只需２０秒，就可完成注册" class="register-now">微信扫码注册</a>
-                    <div class="third-party-login">
-                        <div class="third-party-txt">
-                            <em class="word" style="color:#888888;">微信登录</em>
-                        </div>
-                        <div class="penguin-box">
-                            <!--<a href="https://" class="icon penguin-icon"></a>-->
-                        </div>
-                    </div>
+                   <div class="school">
+                        <div class="schoolLogo"></div>
+                   </div>
+                  
                     <script type="text/javascript">
+                        /*切换check按钮*/
+                        $(document).ready(function () {
+                           //判断当前复选框状态，并让label背景图与复选框同步勾选或取消
+                           $(".checkbox").click(function (){
+                           //判断复选框勾选状态
+                             if ($(this).is(':checked')) {
+                                $(".checklist").removeClass("iCheck");    //删除未勾选选背景图
+                                $(".checklist").addClass("iCheck-ed");    //添加勾选态背景图
+                           }else{
+                                $(".checklist").removeClass("iCheck-ed"); //删除勾选选背景图
+                                $(".checklist").addClass("iCheck");       //添加未勾选选背景图
+                           }
+                          });
+                        });
+
                         var UserName = document.getElementById("UserName");
                         //var hfUserName = document.getElementById("hfUserName");
                         var Password = document.getElementById("Password");

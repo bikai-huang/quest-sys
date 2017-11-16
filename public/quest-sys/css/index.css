@@ -1055,9 +1055,10 @@ button.close {
 /* 满屏 */
 .fp-enabled, 
 .fp-viewing {
-  position: relative;
   width: 100%;
-  height: 100%;
+   background-image: url(./img/loginbg.png);
+  background-repeat: no-repeat;
+  background-size: 100% 120%;
 }
 
 /*
@@ -1067,12 +1068,10 @@ button.close {
 .fp-enabled,
 .fp-viewing {
     width: 100%;
-    height: 100%;
 }
 .fullpage-wrapper {
     position: relative;
     width: 100%;
-    height: 100%;
 }
 .fullpage-main {
     position: fixed;
@@ -1166,19 +1165,27 @@ button.close {
   login 登录框
 */
 .validate-box {
-  width: 480px;
-  position: fixed;
-  top: 50%;
-  left:  50%;
-  margin-top: -260px;
-  margin-left: -240px;
-  z-index: 2;
-  border-radius: 14px;
+  width: 600px;
+  margin: 70px auto 0;
+  background-color: rgba(255,255,255,0.9)!important;
   background-color: #fff;
+  filter:Alpha(opacity=50);
+}
+/*新增图片LOGO*/
+.questionLogo{
+   width: 140px;
+   margin: 0 auto;
+   margin-top: -40px;
+}
+.questionText{
+  width: 144px;
+  margin: 0 auto;
+  margin-top: 20px;
+  margin-bottom: 40px;
 }
 .validate-box .validate-wrapper,
 .validate-box .submit-wrapper {
-  padding: 0 50px;
+  padding: 0 100px;
 }
 .validate-box .validate-caption {
     font-size: 24px;
@@ -1191,7 +1198,7 @@ button.close {
 .validate-box .validate-wrapper ul li {
     position: relative;
     width: 100%;
-    margin-bottom: 16px;
+    margin-bottom: 20px;
     /*border-radius: 100px;
     border: 1px solid #e6e6e6;*/
 }
@@ -1205,12 +1212,12 @@ button.close {
     left: 16px;
     top: 12px;
 }
-.validate-box .validate-wrapper .user-icon {
+/*.validate-box .validate-wrapper .user-icon {
     background: url("//image.sojump.com/images/register-login/user.png") no-repeat center;
 }
 .validate-box .validate-wrapper .password-icon {
     background: url("//image.sojump.com/images/register-login/password.png") no-repeat center;
-}
+}*/
 .validate-box .validate-wrapper .mobile-icon {
     background: url("//image.sojump.com/images/register-login/phone.png") no-repeat center;
 }
@@ -1219,17 +1226,17 @@ button.close {
 }
 .validate-box .validate-wrapper .validate-input {
     border: none;
-    width: 100%;
-    *width: 332px;
-    height: 46px;
-    *height: 26px;
+    width: 400px;
+    *width: 400px;
+    height: 50px;
+    *height: 50px;
     line-height: 1.4;
     line-height: 2 \9;
     font-size: 14px;
-    padding: 10px 0 10px 46px;
-    border-radius: 100px;
-    border: 1px solid #e6e6e6;
-    background:#fff !important;
+    padding: 10px 0 10px 20px;
+    border-radius: 3px;
+    border: 1px solid #E0E6EA;
+    background-color:#ffffff !important;
 }
 .validate-box .validate-wrapper .validate-input:focus {
     outline: none;
@@ -1354,7 +1361,6 @@ background-color: #ff6161;
     background-color: #fff;
     border-color: #f7941d;
     line-height: 2;
-
 }
   .get-code-btn:hover {
     color: #fff !important;
@@ -1414,14 +1420,74 @@ background-color: #ff6161;
 .validate-box .validate-wrapper .remember-box .get-back:hover {
     color: #fa911e
 }
+/*单选框*/
+.checklist{
+  float:left;
+  display: inline-block;
+  width: 18px ;
+  height: 18px;
+  margin-right: 6px;
+  margin-top: 2px;
+}
+/* checkbox 原复选框隐藏 */
+.checkbox{
+  width: 18px ;
+  height: 18px;
+  opacity:0;
+  filter:alpha(opacity=0);
+}
+/* label 的背景图片 iCheck未选中 iCheck-ed选中 */
+.iCheck{
+  background:url(./img/select.png) no-repeat;
+}
+.iCheck-ed{
+  background:url(./img/checked.png) no-repeat;
+}
+/* 复选框自定义样式 End */
 
+/*微信登录按钮*/
+.weChatLogin{
+  width: 400px;
+  height: 50px;
+  border-radius: 3px;
+  border: 1px solid #22B100;
+  background: #ffffff;
+  font-size: 14px;
+  color: #22B100;
+  margin-top: 20px;
+  position: relative;
+}
+.weLogo{
+  display: block;
+  float: left;
+  margin-left: 157px;
+  margin-right: 8px;
+  margin-top: 3px;
+  width: 20px;
+  height: 20px;
+  background: url(./img/weChat.png) no-repeat;
+}
+.weChatLogin span{
+  float: left;
+}
+/*学校logo*/
+.school{
+  width: 100%;
+   margin: 100px auto 40px;
+}
+.schoolLogo{
+  width: 137px;
+  height: 30px;
+  background: url(./img/schoolLogo.png) no-repeat;
+  margin: 0 auto;
+}
 input.submitbutton
  {
-    width: 100% !important;
-    height: 46px !important;
-    font-size: 20px !important;
-    border-radius: 100px !important;
-    background-color: #428bca ;
+    width: 400px !important;
+    height: 50px !important;
+    font-size: 14px !important;
+    border-radius: 3px !important;
+    background-color: #1198FF ;
     border: none !important;
 }
 input.submitbutton:hover
@@ -1434,9 +1500,9 @@ background-color:#f08200;
 }
 .validate-box .submit-wrapper .register-now,
  .log-on {
-    font-size: 18px;
+    font-size: 14px;
     color: #428bca;
-    margin: 16px 0 26px;
+    margin: 16px 0 26px 8px;
     display: block;
 }
 .validate-box .submit-wrapper .register-now:hover,
@@ -1767,4 +1833,59 @@ background-color:#f08200;
 #Register1_liMobile .validate-input
 {
     *float:left;
+}
+/*忘记密码*/
+.forgetBg{
+  width: 100%;
+   background-image: url(./img/loginbg.png);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+.forget-questionLogo{
+   width: 140px;
+   margin: 0 auto;
+   margin-top: -40px;
+}
+.forget-questionText{
+  width: 144px;
+  margin: 0 auto;
+  margin-top: 20px;
+  margin-bottom: 40px;
+  font-size: 24px;
+  line-height: 24px;
+  font-weight: bold;
+  color: #428bca;
+  /*padding: 40px 0;*/
+  text-align: center;
+}
+/*
+上传页面
+ */
+.popups{
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: #000;
+  opacity: 0.5;
+  display: none;
+}
+.popbox{
+  width: 700px;
+  height: 500px;
+  background: #fff;
+  border-radius: 5px;
+  margin: 0 auto;
+  margin-top: 100px;
+}
+.progress{
+  width: 660px;
+}
+.closeBox{
+  float: right;
+  margin: 10px 10px 0 0;
+  font-size: 30px;
+  line-height: 20px;
+  cursor: pointer;
 }
