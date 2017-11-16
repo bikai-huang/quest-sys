@@ -1825,7 +1825,7 @@ background-color:#f08200;
 }
 #Register1_liMobile a
 {
-        width: 70px;
+    width: 70px;
     float: right;
     line-height: 46px;
     vertical-align: middle;
@@ -1868,9 +1868,10 @@ background-color:#f08200;
   left: 0;
   bottom: 0;
   right: 0;
-  background: #000;
-  opacity: 0.5;
   display: none;
+   background-color: rgba(0,0,0,0.5)!important;
+  /*background-color: #fff;*/
+  filter:Alpha(opacity=50);
 }
 .popbox{
   width: 700px;

@@ -38,3 +38,23 @@ function getHeaderHtml() {
 		}
 	});
 }
+
+//动态创建一个loading弹出层
+function setLoadingPage(){
+	 var Odiv=document.createElement("div");             //创建一个div
+   var Oimg=document.createElement("img");         //创建一个img
+   Odiv.style.cssText="position:fixed;top:0;right:0;bottom:0;left:0;background-color:rgba(230,233,235,0.8)!important;filter:Alpha(opacity=50);";    //创建div的css样式
+   Odiv.id="box";                            //创建div的id为box
+   Odiv.className="Box"; //div的class为Box
+   Oimg.src="./css/img/loading.gif"
+   Oimg.style.cssText="display:block;margin:0 auto;margin-top:300px;background:rgba(0,0,0,0.8)!important;filter:Alpha(opacity=80);;";
+   Odiv.appendChild(Oimg);       //在div内创建一个img
+   document.body.appendChild(Odiv); 
+
+        //在body内创建一个div 
+}
+//删除加载样式
+function removeLoading(){
+	var box=document.getElementById("#box");
+	box.style.display="none";
+}
