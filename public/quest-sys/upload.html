@@ -31,13 +31,14 @@
 
   <body class="uploadbg">
     <button class="pop" id="pop">弹出</button>
+    <button onclick="setLoadingPage()">动态生成</button>
     <div class="popups" id="popups">
       <div id="uploadForm" class="popbox">
       <div class="closeBox" id="closeBox">×</div>
  <!-- 源码样式 -->
           <div class="navbar navbar-default navbar-fixed-top"></div>
 
-         
+           
           <div class="container">
               
               <br>
@@ -98,6 +99,10 @@
     
 
 <script>
+    function hiddenSetting(id) {
+            var obj = $("#box");
+            obj.remove();
+        }
 
    
      $("#pop").on("click",function(){

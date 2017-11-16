@@ -9,10 +9,12 @@
   <link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
   <script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <script type="text/javascript" src="./js/common.js"></script></head>
+  <script type="text/javascript" src="./js/common.js"></script>
    <link rel="stylesheet" type="text/css" href="./css/default.css">
   <link rel="stylesheet" type="text/css" href="./css/wjxmaster.css">
-  
+  <link rel="stylesheet" type="text/css" href="./css/paper-edit.css">
+  <!-- <script src="./js/paper-edit.js"></script> -->
+ </head>
   
 <style>
 .title-container{
@@ -121,7 +123,7 @@
 	margin-left: 10px;
 }
 </style>
-<body >
+<body style="background: #F2F7F9;">
 <div style="background: #FFFFFF;" >
 		<div id="BS" style="background: #FFFFFF;" >
             </div>
@@ -131,17 +133,8 @@
       </div> 
 	</div>
 
-	<div class="upload" style="display: block;">
-		<div class="upload-content">
-			<label>图片地址</label>
-			<input type="text" value="请输入网络图片的Url地址" />
-			<label>上传图片</label>
-			<input type="file" id="uploadFile" />
-			<input type="button" onclick="" />
-		</div>
-	</div>
 
-<div class="title-container">
+<!-- <div class="title-container">
 	<div class="paper-title-div">
 		<label for="title">问卷名称：</label>
 		<input name="title"  class="paper-title" value="" type="text" />
@@ -150,9 +143,69 @@
 		<button class="btn btn-primary main-banner-btn title-btn" type="button" onclick="savePaper()">提交标题</button>
 		<br>
 	</div>
+</div> -->
+ 
+<div class="editContent">
+	<div class="editTitle">
+		<div class="issueName clearfix">
+			<div class="issueTitle fl">问题名称</div>
+			<input type="text" class="fl issueInput">
+		</div>
+		<div class="issueDescribe clearfix">
+			<div class="describeTitle fl">问卷描述说明</div>
+			<textarea name="" id="" cols="30" rows="10" class="fl describeTxt"></textarea>
+		</div>
+		<div class="line"></div>
+	</div>
+	<div class="editContainer" id="editContainer">
+		<div class="block clearfix">
+			<div class="build clearfix">
+				<select name="" id="" class="issueSelect">
+			    <option value="">单选题</option>
+			    <option value="">多选题</option>
+			    <option value="">问答题</option>
+		    </select>
+		    <div class="Otitle">问题 1</div>
+		    <textarea name="" id="" cols="30" rows="10" class="Otextarea"></textarea>
+		    <button class="uploadImg clearfix"><i class="OImg"></i>上传图片</button>
+		    <button class="addIssue">＋新增问题</button>
+		    <div class="delectIssue">删除此问题</div>
+			</div>
+			<div class="setOption clearfix">
+				<div class="setName">设置选项</div>
+					<input type="text" class="setInput1">
+				  <button class="uploadImg"><i class="OImg"></i>上传图片</button>
+		      <button class="addIssue">＋新增问题</button>
+		      <div class="delectIssue">删除此问题</div>
+				
+		    <div class="setLines">
+		    	<input type="text" class="setInput2">
+				  <button class="uploadImg1"><i class="OImg1"></i>上传图片</button>
+		      <button class="addIssue1">＋新增问题</button>
+		      <div class="delectIssue1">删除此问题</div>
+		    </div>
+		    <div class="setLines">
+		    	<input type="text" class="setInput2">
+				  <button class="uploadImg1"><i class="OImg1"></i>上传图片</button>
+		      <button class="addIssue1">＋新增问题</button>
+		      <div class="delectIssue1">删除此问题</div>
+		    </div>
+		    
+			</div>
+			
+		</div>
+		
+	</div>
+	<button class="submit">确 定</button>
+   	 
 </div>
-
 <div class="container">
+  
+
+
+
+
+
 	<!-- 选择题 -->
 	<div class="topic" id="default-topic" style="display: none;">
 		<div class="col-md-6 col-xs-12 col-lg-6" >
@@ -228,6 +281,7 @@
 </div>
 </body>
 <script type="text/javascript" >
+	window.onload=setEdit;
 
 var id = getvl('id');
 var topics = new Array();
