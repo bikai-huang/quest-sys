@@ -45,8 +45,11 @@
               <span class="btn btn-success fileinput-button">
                   <i class="glyphicon glyphicon-plus"></i>
                   <span>选择文件</span>
-                  <!-- The file input field used as target for the file upload widget -->
-                  <input id="fileupload" type="file" name="files[]" multiple>
+                  <!-- The file input field used as target for the file upload widget ]
+                    <input id="fileupload" type="file" name="files[]" multiple>
+                 -->
+                  
+                 <input id="fileupload" type="file" name="files[]" multiple>
               </span>
               <br>
               <br>
@@ -134,7 +137,6 @@
 
     $(function () {
     'use strict';
-    alert(host);
     // Change this to the location of your server-side upload handler:
     var url = host + '/upload',
     
@@ -208,6 +210,7 @@
             progress + '%'
         );
     }).on('fileuploaddone', function (e, data) {
+        console.log(data.url + '/' + data.result.files[0].name);
         $.each(data.result.files, function (index, file) {
             if (file.url) {
                 var link = $('<a>')

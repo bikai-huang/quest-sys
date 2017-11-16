@@ -182,7 +182,8 @@ function getPaper() {
 							html += '<p class="topic-desc">' + item.tdesc + '</p>';
 							$.each(item.options, function(i, opItem) {
 								html += '<div class="radio"><label>';
-								html += '<input type="radio" name="topic' + topic_number + '" value="' + i + '">' + opItem.odesc;
+								var optionValue = i + 1;
+								html += '<input type="radio" name="topic' + topic_number + '" value="' +  optionValue + '">' + opItem.odesc;
 								html += '</label></div>';
 							});
 						} else if(item.ttype == 1) {
@@ -206,12 +207,13 @@ function getPaper() {
 							html += '<p class="topic-desc">' + item.tdesc + '</p>';
 							$.each(item.options, function(i, opItem) {
 								html += '';
+								var optionValue = i + 1;
 								if(i==0) {
-									html += opItem.odesc + '<input type="radio" class="count" value="' + i + '" name="topic' + topic_number + '">' + opItem.point; 
+									html += opItem.odesc + '<input type="radio" class="count" value="' + optionValue + '" name="topic' + topic_number + '">' + opItem.point; 
 								} else if(i==item.options.length-1) {
-									html += '<input type="radio" class="count" value="' + i + '" name="topic' + topic_number + '">' + opItem.point + ' ' + opItem.odesc; 
+									html += '<input type="radio" class="count" value="' + optionValue + '" name="topic' + topic_number + '">' + opItem.point + ' ' + opItem.odesc; 
 								} else {
-									html += '<input type="radio" class="count" value="' + i + '" name="topic' + topic_number + '">' + opItem.odesc; 
+									html += '<input type="radio" class="count" value="' + optionValue + '" name="topic' + topic_number + '">' + opItem.odesc; 
 								}
 								
 								html += '';
@@ -221,10 +223,11 @@ function getPaper() {
 							html += '<p class="topic-desc">' + item.tdesc + '</p>';
 							html += '<div class=""><label><select class="form-control" name="topic' + topic_number + '">';
 							$.each(item.options, function(i, opItem) {
+								var optionValue = i + 1;
 								if(i==0) {
-									html += '<option  selected value="' + i + '" >' + opItem.odesc + '</option>'; 
+									html += '<option  selected value="' + optionValue + '" >' + opItem.odesc + '</option>'; 
 								} else {
-									html += '<option value="' + i + '" >' + opItem.odesc + '</option>'; 
+									html += '<option value="' + optionValue + '" >' + opItem.odesc + '</option>'; 
 								}
 							});
 							html += '</select></label></div>';
@@ -396,14 +399,12 @@ var startTime = new Date();
 					topics.push(topic);
 				}
 			}
-			
 		}
 		
 		if(checkin) {
 			var topic = JSON.stringify(topics);
 			var endTime = new Date();
 			console.log('endTime:' + endTime);
-			console.log('topic:' + topic);
 		$.ajax({
 			url: host + '/api/updatePaperForAnswer',
 			type: "POST",
