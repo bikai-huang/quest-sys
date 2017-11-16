@@ -20,15 +20,27 @@
 <style>
 .container{
 	width: 100%;
-	padding: 30px 10% 10px 10%;
+	background: #F2F7F9;
+	padding: 30px 96px 160px 96px;	
+}
+.contentBlock{
+	width:100%;
+	background:#ffffff;
+	padding:40px;
+	margin-top:20px;
 }
 
 .addpaper-btn{
-	font-size: 24px;
+	font-size: 18px;
 	padding: 10px 30px;
 	margin-bottom: 30px;
+	background: #1198FF;
+	float:right;
 }
-
+.btnPlace{
+	width:100%;
+	height:50px;
+}
 .paper-list-ul{
 	width: 100%;
 	
@@ -85,14 +97,16 @@
 	</script>
 	
     <div class="container" >
-    		<button class="btn btn-primary main-banner-btn addpaper-btn" type="button" id="btn">
+    	<div class="contentBlock">
+    		<div class="btnPlace">
+    			<button class="btn btn-info addpaper-btn" type="button" id="btn">
           	+ 新增用户
-      		</button>
-             
-			<ul class="paper-list-ul">
-			</ul>
-    	<ul class="pagination" id="pagination1"></ul>
-    
+      		</button>  
+        </div>  
+				<ul class="paper-list-ul">
+				</ul>
+	    	<ul class="pagination" id="pagination1"></ul>
+	    </div>
     </div>     
     
     

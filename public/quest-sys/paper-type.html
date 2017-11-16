@@ -15,6 +15,22 @@
   <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
   <script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="./js/common.js"></script>
+
+<style>
+    .nav-wrapper{
+        padding-left:95px;
+        margin-bottom:30px;
+    }
+    .questName{
+        line-height:40px;
+    }
+    .form-control{
+        width:430px;
+    }
+    .questPlace{
+        margin-left:35%;
+    }
+</style>
 </head>
 
 <body data-gr-c-s-loaded="true">
@@ -28,21 +44,16 @@
        <link rel="stylesheet" type="text/css" href="./css/choosetype.css">
 
     <div class="nav-header">
-        <div class="container">
+        <div class="my-container">
             <div class="nav-wrapper clearfix">
                 <em class="hd-title pull-left">选择创建问卷类型</em>
             </div>
         </div>
     </div>
-    <br>
-    	<div class="row">
-    	<div class="col-md-4 col-xs-12 col-lg-4" style="">
-    	</div>
-    	<div class="col-md-4 col-xs-12 col-lg-4" style="">
-	    <label for="paperName">问卷名称: </label>
-      	<input type="text" class="form-control" id="paperName" name="paperName" maxlength="72">
-      </div>
-      </div>
+    	<div class="questPlace">
+    	    <label for="paperName" class="questName">问卷名称: </label>
+          	<input type="text" class="form-control" id="paperName" name="paperName" maxlength="72">
+        </div>
       
       <div class="section main-wrapper">
         <div class="module-box">

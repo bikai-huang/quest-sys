@@ -139,8 +139,10 @@
 
     $(function () {
     'use strict';
+    alert(host);
     // Change this to the location of your server-side upload handler:
     var url = host + '/upload',
+    
         uploadButton = $('<button/>')
             .addClass('btn btn-primary')
             .prop('disabled', true)

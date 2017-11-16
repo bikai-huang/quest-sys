@@ -53,7 +53,6 @@ textarea{
 
 .topic-option-fill-line {
 	width: auto;
-	/*border-bottom: 1px solid #909ba7;*/
 	margin-left: 10px;
 }
 .count {
@@ -121,9 +120,58 @@ input{
 }
 .contentBlock{
 	height:auto;
-	padding-left:20%;
-	padding-right:20%;
+	padding-left:15%;
+	padding-right:15%;
 	padding-top:30px;
+}
+.choiceImg{
+	width:100%;
+	height:auto;
+}
+ul{
+	padding:0;
+	width:100%;
+	height:auto;
+}
+li{
+	width:339px;
+	height:385px;
+	list-style-type:none;
+	float:left;
+}
+.imginfo{
+	width:320px;
+	height:340px;
+	border:1px solid #ddd;
+}
+.clearfix:after {
+  display: block;
+  content: "";
+  clear: both; 
+}
+
+.clearfix {
+  zoom: 1; 
+}
+.imgbox{
+	padding:5px;
+	width:250px;
+	height:293px;
+	margin:0 auto;
+}
+img{
+	width:100%;
+	height:100%;
+}
+.choiceItem{
+	text-align:center;
+	font-size:14px;
+}
+.num{
+	text-align: center;
+  padding-top: 10px;
+  font-size: 16px;
+  color: #ff6600;
 }
 </style>
 <body >
@@ -136,6 +184,26 @@ input{
     		<div class="paper-desc"></div>
     		
     		<div class="paper-content">
+
+    			<p class="topic-desc">给你喜欢的明星投票</p>
+    			<div class="choiceImg clearfix">
+    				<ul>
+    					<li>
+    						<div class="imginfo clearfix">
+    							<div class="imgbox">
+    								<img src="img/ren.jpg">
+    							</div>
+    							<div class="choiceItem">
+	    							<div class="checkbox">
+	    							<label><input type="checkbox">赵雅芝</label>
+	    							</div>
+	    						</div>
+    						</div> 
+    						<p class="num">0&nbsp;&nbsp;票</p>   						
+    					</li>
+    				</ul>
+    			</div>
+
     		</div>
 		</div>
 		<!-- <div class="col-md-4 " >

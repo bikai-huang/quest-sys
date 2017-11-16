@@ -27,8 +27,20 @@
 
         .roleType{
             width: 100%;
-            font-size: 18px;
+            padding-left: 10px;
             height: 48px;
+            border: 1px solid #E0E6EA;
+        }
+        .container{
+            width: 100%;
+            background: #F2F7F9;
+            padding: 30px 128px 160px 128px;    
+        }
+        .contentBlock{
+            width:100%;
+            background:#ffffff;
+            padding:40px 40px 100px 40px;
+            margin-top:20px;    
         }
     </style>
 </head>
@@ -40,14 +52,15 @@
             <script>
                 getHeaderHtml();
             </script>
-
-<div id="divSojump" class="validate-box" style="margin-top: -300px;">
+<div class="container">
+<div class="contentBlock">
+<div id="divSojump" class="validate-box">
     <fieldset class="validate-wrapper">
         <legend class="validate-caption">新增用户</legend>
         <ul>
             <li>
                 <label for="login" class="icon user-icon"></label>
-                <input id="login" placeholder="请输入系统登录账户名" class="validate-input login" type="text" onfocus="if(value==&#39;请输入系统登录账户名&#39;){value=&#39;&#39;;}" onblur="if(value==&#39;&#39;){value=&#39;请输入系统登录账户名&#39;}">
+                <input id="login" placeholder="请输入系统登录账户名" class="validate-input login" type="text" >
                 <div class="divclear"></div>
             </li>
             
@@ -60,31 +73,31 @@
 
             <li>
                 <label for="realname" class="icon user-icon"></label>
-                <input id="realname" placeholder="请输入真实姓名" class="validate-input realname" type="text" onfocus="if(value==&#39;请输入真实姓名&#39;){value=&#39;&#39;;}" onblur="if(value==&#39;&#39;){value=&#39;请输入真实姓名&#39;}">
+                <input id="realname" placeholder="请输入真实姓名" class="validate-input realname" type="text">
                 <div class="divclear"></div>
             </li>
 
             <li>
                 <label for="email" class="icon user-icon"></label>
-                <input id="email" placeholder="请输入用户email" class="validate-input email" type="text" onfocus="if(value==&#39;请输入用户email&#39;){value=&#39;&#39;;}" onblur="if(value==&#39;&#39;){value=&#39;请输入用户email&#39;}">
+                <input id="email" placeholder="请输入用户email" class="validate-input email" type="text">
                 <div class="divclear"></div>
             </li>
 
             <li>
                 <label for="phone" class="icon user-icon"></label>
-                <input id="phone" placeholder="请输入用户手机号码" class="validate-input phone" type="text" onfocus="if(value==&#39;请输入用户手机号码&#39;){value=&#39;&#39;;}" onblur="if(value==&#39;&#39;){value=&#39;请输入用户手机号码&#39;}">
+                <input id="phone" placeholder="请输入用户手机号码" class="validate-input phone" type="text">
                 <div class="divclear"></div>
             </li>
 
             <li>
                 <label for="origination" class="icon user-icon"></label>
-                <input id="origination" placeholder="请输入单位名" class="validate-input origination" type="text" onfocus="if(value==&#39;请输入单位名&#39;){value=&#39;&#39;;}" onblur="if(value==&#39;&#39;){value=&#39;请输入单位名&#39;}">
+                <input id="origination" placeholder="请输入单位名" class="validate-input origination" type="text">
                 <div class="divclear"></div>
             </li>
             
              <li>
                 <label for="department" class="icon user-icon"></label>
-                <input id="department" placeholder="请输入部门" class="validate-input department" type="text" onfocus="if(value==&#39;请输入部门&#39;){value=&#39;&#39;;}" onblur="if(value==&#39;&#39;){value=&#39;请输入部门&#39;}">
+                <input id="department" placeholder="请输入部门" class="validate-input department" type="text">
                 <div class="divclear"></div>
             </li>
             
@@ -94,6 +107,8 @@
     <fieldset class="submit-wrapper" style="text-align: center; margin-top: 20px;">
         <input type="submit" value="保存用户" id="resetPassword" onclick="resetPassword();" class="submitbutton" onmouseover="this.className=&#39;submitbutton submitbutton_hover&#39;;" onmouseout="this.className=&#39;submitbutton&#39;;" style="color:White;">
     </fieldset>
+</div>
+</div>
 </div>
 </body>
 <script>
@@ -116,41 +131,58 @@ function resetPassword() {
     var phone = $('#phone').val();
     var origination = $('#origination').val();
     var department = $('#department').val();
+    var regEmail = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/ 
+    var regphone = /^1[34578]\d{9}$/
 
     var roleType = 1;
 
     if(userRole==0) {
         roleType = $('select[name="roleType"]').val();
     }
-
     if(!login) {
-        alert('请输入系统登录账户名.');
+        alert('请输入系统登录账户名');
         return;
     }
     if(!realname) {
-        alert('请输入真实姓名.');
+        alert('请输入真实姓名');
         return;
     }
+    if(!regEmail.test(email)){
+        alert('请输入正确的邮箱格式')
+        return
+    }
+    if(!regphone.test(phone)){
+        alert('请输入正确的手机号码')
+        return
+    }
+    if(!origination) {
+        alert('请输入单位名称');
+        return;
+    }
+    if(!department) {
+        alert('请输入部门名称');
+        return;
+    }
+
     
     $.ajax({
-			url: host + '/api/a/addUser/',
-			type: "GET",
-			dataType: "json", 
-			data: {token: token, login: login, realname: realname, email: email, phone: phone, origination: origination, department: department, roleType: roleType},
-			cache: false,
-			success: function(result) {
-				console.log(result.paperList)
-				if (result.state == 200) {
-                    alert('保存用户成功！');
-                    location.href = 'user-list.html';
-				} else {
-					alert(result.data.error);
-				}
-			},
-			error: function(XMLHttpRequest, textStatus, errorThrown) {
-												
-      		}
-		});
+		url: host + '/api/a/addUser/',
+		type: "GET",
+		dataType: "json", 
+		data: {token: token, login: login, realname: realname, email: email, phone: phone, origination: origination, department: department, roleType: roleType},
+		cache: false,
+		success: function(result) {
+			console.log(result.paperList)
+			if (result.state == 200) {
+                alert('保存用户成功！');
+                location.href = 'user-list.html';
+			} else {
+				alert(result.data.error);
+			}
+		},
+		error: function(XMLHttpRequest, textStatus, errorThrown) {											
+  		}
+	});
 
 }
 </script>

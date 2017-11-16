@@ -10,6 +10,7 @@
   <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
   <script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <script type="text/javascript" src="./js/common.js"></script></head>
+  <link rel="stylesheet" type="text/css" href="./css/default.css">
    <link rel="stylesheet" type="text/css" href="./css/wjxmaster.css">
 <style>
 body{
@@ -29,8 +30,19 @@ textarea{
 }
 
 .container{
-	background-color: white;
-	margin: 7% 6% 10%;
+	width: 100%;
+	background: #F2F7F9;
+	padding: 30px 128px 160px 128px;	
+}
+.contentBlock{
+	width:100%;
+	background:#ffffff;
+	padding:40px;
+	margin-top:20px;
+}
+.content{
+	padding-left:20%;
+	padding-right:20%;
 }
 .topic-desc{
 	font-weight: bold;
@@ -40,33 +52,37 @@ textarea{
 	border-bottom: 1px solid #FAF0E6;
 	margin-bottom: 30px;
 }
-
 .link{
-	width: 100%;
+  width: 90%;
+  height: 30px;
+  padding-left: 10px;
+}
+p{
+	font-size:16px;
+	line-height:40px;
 }
 </style>
 <body >
 <div id="BS" style="background: #FFFFFF;" >
-		<div id="BS" style="background: #FFFFFF;" >
-            </div>
-            <script>
-                getHeaderHtml();
-            </script> 
-      </div> 
-	</div>
+	<div id="BS" style="background: #FFFFFF;" ></div>
+    <script>
+        getHeaderHtml();
+    </script> 
+</div>
 	
 	<div class="container">
-    	<div class="col-md-4 col-xs-12 col-lg-4" >
-    	</div>
-		<div class="col-md-4 col-xs-12 col-lg-4 content" >
+		<div class="contentBlock">
+			<div class="content" >
     		<p>问卷链接</p>
     		<input type="text" value="" id="link" class="link" />
     		<br><br>
     		<p>二维码</p>
-			<img src="" id="code" />
-    		</div>
-    	</div>
-    	
+				<img src="" id="code" />
+  		</div> 
+
+		</div>
+
+    	   	
     </div>
 </body>
 <script type="text/javascript" >
