@@ -32,12 +32,17 @@ textarea{
 .container{
 	width: 100%;
 	background: #F2F7F9;
-	padding: 30px 96px 160px 96px;	
+	padding: 30px 128px 160px 128px;	
 }
 .contentBlock{
 	width:100%;
 	background:#ffffff;
 	padding:40px;
+	margin-top:20px;
+}
+.content{
+	padding-left:20%;
+	padding-right:20%;
 }
 .topic-desc{
 	font-weight: bold;
@@ -47,9 +52,14 @@ textarea{
 	border-bottom: 1px solid #FAF0E6;
 	margin-bottom: 30px;
 }
-
 .link{
-	width: 100%;
+  width: 90%;
+  height: 30px;
+  padding-left: 10px;
+}
+p{
+	font-size:16px;
+	line-height:40px;
 }
 </style>
 <body >
@@ -62,8 +72,7 @@ textarea{
 	
 	<div class="container">
 		<div class="contentBlock">
-			<div class="col-md-4" ></div>
-			<div class="col-md-4 content" >
+			<div class="content" >
     		<p>问卷链接</p>
     		<input type="text" value="" id="link" class="link" />
     		<br><br>

@@ -1166,7 +1166,8 @@ button.close {
 */
 .validate-box {
   width: 600px;
-  margin: 70px auto 0;
+  margin:0 auto;
+  /*margin: 30px auto 0;*/
   background-color: rgba(255,255,255,0.9)!important;
   background-color: #fff;
   filter:Alpha(opacity=50);
@@ -1192,8 +1193,8 @@ button.close {
     line-height: 24px;
     font-weight: bold;
     color: #428bca;
-    padding: 40px 0;
-    text-align: left;
+    padding: 30px 0;
+    text-align: center;
 }
 .validate-box .validate-wrapper ul li {
     position: relative;

@@ -1415,9 +1415,7 @@ background: url("/Images/newimg/last1.png") no-repeat center;
 }
 .task-quickcreate-body .form-control {
 	width: 176px;
-	*width: 150px;
 	height: 82px;
-	*height: 56px;
 	color: #333;
 	line-height: 1.2;
 	padding: 12px;
