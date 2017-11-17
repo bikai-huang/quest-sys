@@ -9,17 +9,119 @@
   <link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
   <script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <script type="text/javascript" src="./js/common.js"></script>
+  <script type="text/javascript" src="./js/common.js"></script></head>
    <link rel="stylesheet" type="text/css" href="./css/default.css">
   <link rel="stylesheet" type="text/css" href="./css/wjxmaster.css">
-  <link rel="stylesheet" type="text/css" href="./css/paper-edit.css">
-  <!-- <script src="./js/paper-edit.js"></script> -->
- </head>
+  
   
 <style>
+.title-container{
+	padding: 5% 10% 0 10%;
+}
+.container{
+	padding: 10px 5%;
+}
+.paper-title{
+	width: 100%;
+	margin-bottom: 10px;
+}
+.paper-title-div{
+	padding: 10px;
+}
+.paper-desc-p{
+	font-size: 20px;
+	margin-bottom: 10px;
+}
+.paper-desc{
+	width: 100%;
+	margin-bottom: 10px;
+}
+.title-btn{
+	font-size: 16px;
+	padding: 10px 15px;
+}
 
+.topic{
+	background-color: #cfe7ff;
+	overflow: auto;
+	padding: 20px 0px;
+	margin: 40px auto;
+}
+.topic-title{
+	width: 100%;
+}
+
+.option-title{
+	width: 100%;
+	overflow: auto;
+}
+.option-text{
+	width: 50%;
+	text-align: left;
+	float: left;
+	padding: 5px 15px 5px 0;
+}
+.option-text-img{
+	width: 50%;
+	text-align: left;
+	float: left;
+	padding: 5px 15px;
+}
+.topic-option-input{
+	width: 96%;
+}
+.option-input-div{
+	margin: 0;
+	padding: 0;
+}
+.btn{
+	padding-top: 4px;
+	padding-bottom: 4px;
+}
+.topic-btn{
+	right: 20px;
+	position: absolute;
+	top: 90px;
+}
+.topic-btn-line{
+	margin: 10px auto;
+	overflow: auto;
+}
+.option-detail{
+	margin-bottom: 10px;
+	overflow: auto;
+}
+.option-row{
+	margin-bottom: 10px;
+	overflow: auto;
+}
+
+.option-text-table{
+	width: 25%;
+	text-align: left;
+	float: left;
+	padding: 5px 15px 5px 0;
+}
+.topic-option-table{
+	width: 48%;
+}
+.topic-option-value{
+	width: 10%;
+	margin-left: 5px;
+}
+
+.topic-option-fill-desc {
+	width: 48%;
+}
+.topic-option-fill-line {
+	width: 46%;
+	border: 0;
+	border-bottom: 1px solid #909ba7;
+	background-color: #cfe7ff;
+	margin-left: 10px;
+}
 </style>
-<body style="background: #F2F7F9;">
+<body >
 <div style="background: #FFFFFF;" >
 		<div id="BS" style="background: #FFFFFF;" >
             </div>
@@ -29,77 +131,18 @@
       </div> 
 	</div>
 
- 
-<div class="editContent">
-	<!--title -->
-	<div class="editTitle">
-		<div class="issueName clearfix">
-			<div class="issueTitle fl">问卷名称</div>
-			<input type="text" class="fl issueInput" name="title" id="title" >
-		</div>
-		<div class="issueDescribe clearfix">
-			<div class="describeTitle fl">问卷描述说明</div>
-			<textarea name="desc" id="desc" cols="30" rows="10" class="fl describeTxt"></textarea>
-		</div>
-		<div class="line"></div>
+<div class="title-container">
+	<div class="paper-title-div">
+		<label for="title">问卷名称：</label>
+		<input name="title"  class="paper-title" value="" type="text" />
+		<label for="desc">问卷描述说明：</label>
+		<textarea name="desc"  class="paper-desc" value="" type="text" ></textarea>
+		<button class="btn btn-primary main-banner-btn title-btn" type="button" onclick="savePaper()">提交标题</button>
+		<br>
 	</div>
-
-
-	<div class="editContainer" id="editContainer">
-		<div class="block clearfix">
-			<div class="build clearfix">
-				<select name="" class="issueSelect">
-					<option value="0" selected>单选题</option>
-					<option value="1">多选题</option>
-					<option value="2">问答题</option>
-					<option value="3">填空题</option>
-					<option value="4">量表题</option>
-					<option value="5">下拉框</option>
-					<option value="6">文件上传</option>
-				</select>
-			
-		    <div class="Otitle">问题<span>1</span></div>
-		    <textarea name="" id="" cols="30" rows="10" class="Otextarea"></textarea>
-		    <button class="uploadImg clearfix"><i class="OImg"></i>上传图片</button>
-		    <button class="addIssue">＋新增问题</button>
-		    <div class="delectIssue">删除此问题</div>
-			</div>
-
-			<div class="setOption clearfix">
-				<div class="setName">设置选项</div>
-					<input type="text" class="setInput1">
-				  <button class="uploadImg"><i class="OImg"></i>上传图片</button>
-		      <button class="addIssue">＋新增问题</button>
-		      <div class="delectIssue">删除此问题</div>
-				
-		    <div class="setLines">
-		    	<input type="text" class="setInput2">
-				  <button class="uploadImg1"><i class="OImg1"></i>上传图片</button>
-		      <button class="addIssue1">＋新增问题</button>
-		      <div class="delectIssue1">删除此问题</div>
-		    </div>
-		    <div class="setLines">
-		    	<input type="text" class="setInput2">
-				  <button class="uploadImg1"><i class="OImg1"></i>上传图片</button>
-		      <button class="addIssue1">＋新增问题</button>
-		      <div class="delectIssue1">删除此问题</div>
-		    </div>
-		    
-			</div>
-			
-		</div>
-		
-	</div>
-	<button class="submit">确 定</button>
-   	 
 </div>
+
 <div class="container">
-  
-
-
-
-
-
 	<!-- 选择题 -->
 	<div class="topic" id="default-topic" style="display: none;">
 		<div class="col-md-6 col-xs-12 col-lg-6" >
@@ -175,7 +218,6 @@
 </div>
 </body>
 <script type="text/javascript" >
-	window.onload=setEdit;
 
 var id = getvl('id');
 var topics = new Array();
@@ -190,19 +232,19 @@ var upload_target_id;
 function upload() {
     var formData = new FormData();
     formData.append('file', $('#uploadFile')[0].files[0]);
-    $.ajax({
-        url: host + '/api/a/upload',
-        type: 'POST',
-        cache: false,
-        data: formData,
-        processData: false,
-        contentType: false
-    }).done(function(res) {
-		alert('res.data.url:' + res.data.url);
-		$('#' + upload_target_id).val(res.data.url + res.data.respBody.key);
-    }).fail(function(res) {
-		alert('网络拥堵，请重新上传～');
-    });
+    // $.ajax({
+    //     url: host + '/upload',
+    //     type: 'POST',
+    //     cache: false,
+    //     data: formData,
+    //     processData: false,
+    //     contentType: false
+    // }).done(function(res) {
+	// 	alert('res.data:' + res.data);
+	// 	$('#' + upload_target_id).val(res.data);
+    // }).fail(function(res) {
+	// 	alert('网络拥堵，请重新上传～');
+    // });
 }
 
 function getPaper() {
@@ -404,10 +446,36 @@ function getPaper() {
       		}
 		});
 	}
+	
+
+function saveTitle() {
+	var title = $('.paper-title').val();
+	if(!title) {
+		alert('标题不能为空！');
+		return;
+	}
+	var desc = $('.paper-desc').val();
+	$.ajax({
+		url: host + '/api/a/updatePaperTitle',
+		type: "POST",
+		dataType: "json", 
+		data: {token: token, id: id, title: title, desc: desc},
+		cache: false,
+		success: function(result) {
+			if (result.state == 200) {
+				alert('标题修改成功！');
+			} else {
+				alert(result.data.error);
+			}
+		},
+		error: function(XMLHttpRequest, textStatus, errorThrown) {
+												
+      	}
+	});
+}
 
 var optionNum = 100;
 function cloneOption(cloneId, topic_number, targetId) {
-	alert('cloneId:' + cloneId + '_topic_number:' + topic_number + '_targetId:' + targetId);
 	var ophtml = $('#' + cloneId).clone().attr('id', topic_number + 'option' + optionNum).show();
 	$(ophtml).find('#clonebtn' + topic_number).attr('id', 'clonebtn' + optionNum);
 	$(ophtml).find('#removebtn' + topic_number).attr('id', 'removebtn' + optionNum);
@@ -531,14 +599,6 @@ function changeType(optionId, typeName) {
 
 function savePaper() {
 	var checkin = true;
-
-	var title = $('#title').val();
-	if(!title) {
-		alert('标题不能为空！');
-		return;
-	}
-	var desc = $('#desc').val();
-
 	for(var i=0; i<topic_index.length; i++) {
 		var topicTitle = $('#topicTitle' + topic_index[i]).val();
 		var type = $('[name="topicType' + topic_index[i] + '"]').val();
@@ -619,8 +679,8 @@ function savePaper() {
 		$.ajax({
 		url: host + '/api/a/updatePaperTopic',
 		type: "POST",
-		dataType: "json",
-		data: {token: token, id: id, topic: JSON.stringify(topics), format: 0, title: title, desc: desc},
+		dataType: "json", 
+		data: {token: token, id: id, topic: JSON.stringify(topics), format: 0},
 		cache: false,
 		success: function(result) {
 			if (result.state == 200) {

@@ -28,8 +28,8 @@ function getHeaderHtml() {
 			if(roleType <= 1) {
 				var html = '<a class="user-name" href="user-list.html"><i class="icon questions-icon"><em></em></i><span>用户管理</span></a>';
 				$(dom).find('#funMenu').append(html);
-				$(dom).find('#ctl01_lblUserName').html(login);
 			}
+			$(dom).find('#ctl01_lblUserName').html(login);
 			$('#BS').empty();
 			$('#BS').append(dom);
 		},

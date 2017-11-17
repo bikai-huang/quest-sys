@@ -23,6 +23,8 @@
     }
     .questName{
         line-height:40px;
+        color: #30a6f5;
+        font-size: 16px;
     }
     .form-control{
         width:430px;
@@ -83,7 +85,7 @@
                     <div class="details-info">活动报名</div>
                 </div>
                 <div class="clear dotted-line--solid"></div>
-                <a href="https://" class="btn btn-blue-frame main__btn--new">创建</a>
+                <a href="#" onclick="createdPaper(2);" class="btn btn-blue-frame main__btn--new">创建</a>
             </div>
 
             <div class="figure">
@@ -98,7 +100,7 @@
                     <div class="details-info">在线投票</div>
                 </div>
                 <div class="clear dotted-line--solid"></div>
-                <a href="https://" class="btn btn-blue-frame main__btn--new">创建</a>
+                <a href="#" onclick="createdPaper(3);" class="btn btn-blue-frame main__btn--new">创建</a>
             </div>
             
         </div>
@@ -156,7 +158,13 @@
 						success: function(data) {
 							localStorage.setItem('paper-title', data.data.title);
 							localStorage.setItem('paper-id', data.data._id);
-							location.href='paper-add.html';
+							if(id == 1) {
+                                location.href='paper-add.html';
+                            } else if(id == 2) {
+                                location.href='paper-edit.html?id=' + data.data._id;
+                            } else {
+                                location.href='paper-edit.html?id=' + data.data._id;
+                            }
 						},
 						error: function(XMLHttpRequest, textStatus, errorThrown) {
 							console.log('get news error');
