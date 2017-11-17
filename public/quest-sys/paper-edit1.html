@@ -229,23 +229,7 @@ $(function () {
 });
 
 var upload_target_id;
-function upload() {
-    var formData = new FormData();
-    formData.append('file', $('#uploadFile')[0].files[0]);
-    // $.ajax({
-    //     url: host + '/upload',
-    //     type: 'POST',
-    //     cache: false,
-    //     data: formData,
-    //     processData: false,
-    //     contentType: false
-    // }).done(function(res) {
-	// 	alert('res.data:' + res.data);
-	// 	$('#' + upload_target_id).val(res.data);
-    // }).fail(function(res) {
-	// 	alert('网络拥堵，请重新上传～');
-    // });
-}
+
 
 function getPaper() {
     	$.ajax({

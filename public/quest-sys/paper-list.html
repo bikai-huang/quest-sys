@@ -145,7 +145,13 @@
 					$.each(result.data.paperList, function(i, item) {
 						html += '<li class="paper-list-li">';
 						html += '<div class="paper-list-title-div">';
-						html += '<div class="paper-list-margin paper-list-title">' + item.title + '<a href="paper-preview.html?id=' + item._id + '" >【预览】 </a></div>';
+						
+						if (item.paperType == 3) {
+							html += '<div class="paper-list-margin paper-list-title">' + item.title + '<a href="paper-preimg.html?id=' + item._id + '" >【预览】 </a></div>';
+						} else if (item.status == 2) {
+							html += '<div class="paper-list-margin paper-list-title">' + item.title + '<a href="paper-preview.html?id=' + item._id + '" >【预览】 </a></div>';
+						}
+						
 						var paper_status = '未发布';						
 						if (item.status == 1) {
 							paper_status = '已发布';	
@@ -161,7 +167,7 @@
 						if (item.status == 0) {
 							html += '<div class="paper-list-btn"><a href="paper-edit.html?id=' + item._id + '" >修改问卷</a></div>';
 							html += '<div class="paper-list-btn"><a href="" >设置问卷</a></div>';
-							html += '<div class="paper-list-btn">' + "<a href='#' onclick='publishPaper(\"" + item._id + "\")'>" + '发布问卷</a></div>';
+							html += '<div class="paper-list-btn">' + "<a href='#' onclick='publishPaper(\"" + item._id + "\"," + item.paperType + "\)'>" + '发布问卷</a></div>';
 							html += '<div class="paper-list-btn disabled">停止发布</div>';
 						}else {
 							html += '<div class="paper-list-btn disabled">修改问卷</div>';
@@ -233,12 +239,12 @@
     }
     
     
-    function publishPaper(id) {
+    function publishPaper(id, paperType) {
     	$.ajax({
 			url: host + '/api/a/publishPaper',
 			type: "GET",
 			dataType: "json", 
-			data: {token: token, id: id},
+			data: {token: token, id: id, paperType: paperType},
 			cache: false,
 			success: function(result) {
 				console.log(result.paperList)

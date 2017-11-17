@@ -187,8 +187,7 @@ img{
 
     		</div>
 		</div>
-		<!-- <div class="col-md-4 " >
-    </div> -->
+
 	</div>
 	<div class="submit">
 		<div class="userinfo">
@@ -249,102 +248,6 @@ function getPaper() {
       		}
 		});
     }
-
-var startTime = new Date();
-
-	function savePaper() {
-		var checkin = true;
-		var email = $('#email').val();
-		var regEmail = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/ 
-		if(!email) {
-			alert('请留下您宝贵的邮箱地址！');
-			checkin = false;
-			return;
-		}else if(!regEmail.test(email)){
-			alert('请输入正确的邮箱格式')
-			checkin = false;
-			return;
-		}
-		var telephone = $('#telephone').val();
-		var regphone = /^1[34578]\d{9}$/
-		if(!telephone) {
-			alert('请留下您宝贵的手机号码！');
-			checkin = false;
-			return;
-		}else if(!regphone.test(telephone)){
-			alert('请输入正确的手机号码')
-			checkin = false;
-			return;
-		}
-		for(var i = 1; i <= topic_number; i++) {
-			if(topic_type[i-1] == 0) {
-				var answer = $('input:radio[name="topic' + i + '"]:checked').val();
-				if(!answer) {
-					checkin = false;
-					alert('有问题未回答，请填写后再提交！');
-					topics = new Array();
-					return;
-				} else {
-					var topic = {
-						ttype: 0,
-						tanswer: answer,
-					}
-					topics.push(topic);
-				}
-			} else if(topic_type[i-1] == 1) {
-				var checkboxIsChecked = false;
-				var options = new Array();
-				var temp = document.getElementsByName('topic' + i);
-        		for(var p=0; p<temp.length; p++) {
-					var option;
-            		if(temp[p].checked==true){
-            			checkboxIsChecked = true;
-						option = {
-							oanswer: 1
-						}
-        			} else {
-						option = {
-							oanswer: 0
-						}
-					}
-					options.push(option);
-    			}
-				if(!checkboxIsChecked) {
-					checkin = false;
-					alert('第' + i + '道选择题未回答，请填写后再提交！');
-					topics = new Array();
-					return;
-				} else {
-					var topic = {
-						ttype: 1,
-						options: options
-					}
-					topics.push(topic);
-				}
-			} 
-		}
-		
-		if(checkin) {
-			var topic = JSON.stringify(topics);
-			var endTime = new Date();
-			console.log('endTime:' + endTime);
-			console.log('topic:' + topic);
-		$.ajax({
-			url: host + '/api/updatePaperForAnswer',
-			type: "POST",
-			data: {id: id, topics: topic, startTime: startTime, endTime: endTime, emial: email, telephone: telephone},
-			dataType: "json", 
-			cache: false,
-			success: function(data) {
-				location.href='thanks.html';
-			},
-			error: function(XMLHttpRequest, textStatus, errorThrown) {
-				console.log('get news error');
-      		}
-		});
-		}
-		
-	}
 
 </script>
 </html>
