@@ -114,7 +114,8 @@
  var pagesize = 6;
  var roleType = localStorage.getItem('roleType');
 
-    $.jqPaginator('#pagination1', {
+ function getUserList() {
+	$.jqPaginator('#pagination1', {
         totalPages: 1,
         visiblePages: 10,
 		currentPage: 1,
@@ -180,11 +181,14 @@
 		});
 		}
     });
+ }
+    
     
     $(function () {
 		$('#btn').click(function() {
 			location.href = "user-add.html";
 		});  
+		getUserList();
     });
     
     function removeUser(id) {
@@ -198,7 +202,7 @@
 				console.log(result.paperList)
 				if (result.state == 200) {
 					alert('删除用户成功！');
-					location.href = 'user-list.html';
+					getUserList();
 				} else {
 					alert(result.data.error);
 				}
@@ -221,7 +225,7 @@
 				console.log(result.paperList)
 				if (result.state == 200) {
 					alert('解冻用户成功！');
-					location.href = 'user-list.html';
+					getUserList();
 				} else {
 					alert(result.data.error);
 				}
@@ -244,7 +248,7 @@
 				console.log(result.paperList)
 				if (result.state == 200) {
 					alert('冻结用户成功！');
-					location.href = 'user-list.html';
+					getUserList();
 				} else {
 					alert(result.data.error);
 				}
@@ -256,20 +260,7 @@
 		}
     	
     }
-    
-    /*
-    $.jqPaginator('#pagination2', {
-        totalPages: 100,
-        visiblePages: 10,
-        currentPage: 3,
-        prev: '<li class="prev"><a href="javascript:;">Previous</a></li>',
-        next: '<li class="next"><a href="javascript:;">Next</a></li>',
-        page: '<li class="page"><a href="javascript:;">{{page}}</a></li>',
-        onPageChange: function (num, type) {
-            $('#p2').text(type + '：' + num);
-        }
-    })
-    */
+
 </script>
 </body>
 </html>

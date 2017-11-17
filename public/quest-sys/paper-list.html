@@ -117,91 +117,6 @@
  var pagesize = 5;
  var roleType = localStorage.getItem('roleType');
 
-    $.jqPaginator('#pagination1', {
-        totalPages: 1,
-        visiblePages: 10,
-        currentPage: 1,
-        onPageChange: function (num, type) {
-			$.ajax({
-			url: host + '/api/a/getPapersList',
-			type: "GET",
-			dataType: "json", 
-			data: {token: token, pagesize: pagesize, pagenum: num},
-			cache: false,
-			success: function(result) {
-				if (result.state == 200) {
-					$('.paper-list-ul').empty();
-					var html = '';
-
-					var totalPages = result.data.num / pagesize;
-					var lastNum = result.data.num % pagesize;
-					if(lastNum > 0) {
-						totalPages = totalPages + 1;
-					}
-					$('#pagination1').jqPaginator('option', {
-						totalPages: totalPages,
-					});
-
-					$.each(result.data.paperList, function(i, item) {
-						html += '<li class="paper-list-li">';
-						html += '<div class="paper-list-title-div">';
-						
-						if (item.paperType == 3) {
-							html += '<div class="paper-list-margin paper-list-title">' + item.title + '<a href="paper-preimg.html?id=' + item._id + '" >【预览】 </a></div>';
-						} else if (item.status == 2) {
-							html += '<div class="paper-list-margin paper-list-title">' + item.title + '<a href="paper-preview.html?id=' + item._id + '" >【预览】 </a></div>';
-						}
-						
-						var paper_status = '未发布';						
-						if (item.status == 1) {
-							paper_status = '已发布';	
-						} else if (item.status == 2) {
-							paper_status = '已关闭';
-						}				
-						html += '<div class="paper-list-margin paper-list-state">状态：' +  paper_status + '</div>';
-						html += '<div class="paper-list-margin paper-list-answered">答卷：' + item.count + '</div>';
-						
-						html += '<div class="paper-list-margin paper-list-created-by">' + item.created_name + '</div>';
-						html += '<div class="paper-list-margin paper-list-created">' + item.created.substring(0, 10) + '</div>';
-						html += '</div><div class="paper-list-detail-div">';
-						if (item.status == 0) {
-							html += '<div class="paper-list-btn"><a href="paper-edit.html?id=' + item._id + '" >修改问卷</a></div>';
-							html += '<div class="paper-list-btn"><a href="" >设置问卷</a></div>';
-							html += '<div class="paper-list-btn">' + "<a href='#' onclick='publishPaper(\"" + item._id + "\"," + item.paperType + "\)'>" + '发布问卷</a></div>';
-							html += '<div class="paper-list-btn disabled">停止发布</div>';
-						}else {
-							html += '<div class="paper-list-btn disabled">修改问卷</div>';
-							html += '<div class="paper-list-btn disabled">设置问卷</div>';
-							html += '<div class="paper-list-btn disabled"><a href="paper-link.html?id=' + item._id + '" >问卷链接</a></div>';
-							if (item.status == 1) {
-								html += '<div class="paper-list-btn ">' + "<a href='#' onclick='stopPaper(\"" + item._id + "\")'>" + '停止发布</a></div>';
-							} else {
-								html += '<div class="paper-list-btn disabled">停止发布</div>';
-							}
-						}
-						if (item.count > 0) {
-							html += '<div class="paper-list-btn"><a href="paper-count.html?id=' + item._id + '" >统计分析</a></div>';
-							html += '<div class="paper-list-btn "><a href="' + host + '/api/a/getAnswerForExl?id=' + item._id + '&token=' + token + '" >下载问卷</a></div>';
-						} else {
-							html += '<div class="paper-list-btn disabled">统计分析</div>';
-							html += '<div class="paper-list-btn disabled">下载问卷</div>';
-						}
-						html += '<div class="paper-list-btn">' + "<a href='#' onclick='removePaper(\"" + item._id + "\")'>"  + '删除问卷</a></div>';
-						
-						html += '</div></li>';
-          		});
-          		$('.paper-list-ul').append(html);
-				} else {
-					alert(result.data.error);
-				}
-			},
-			error: function(XMLHttpRequest, textStatus, errorThrown) {
-												
-      		}
-		});
-		}
-    });
-    
     $(function () {
 		$('#btn').click(function() {
 			location.href = "paper-type.html";
@@ -212,8 +127,90 @@
 
     
     function getPaperList() {
-		// 
-    	
+		$.jqPaginator('#pagination1', {
+			totalPages: 1,
+			visiblePages: 10,
+			currentPage: 1,
+			onPageChange: function (num, type) {
+				$.ajax({
+				url: host + '/api/a/getPapersList',
+				type: "GET",
+				dataType: "json", 
+				data: {token: token, pagesize: pagesize, pagenum: num},
+				cache: false,
+				success: function(result) {
+					if (result.state == 200) {
+						$('.paper-list-ul').empty();
+						var html = '';
+	
+						var totalPages = result.data.num / pagesize;
+						var lastNum = result.data.num % pagesize;
+						if(lastNum > 0) {
+							totalPages = totalPages + 1;
+						}
+						$('#pagination1').jqPaginator('option', {
+							totalPages: totalPages,
+						});
+	
+						$.each(result.data.paperList, function(i, item) {
+							html += '<li class="paper-list-li">';
+							html += '<div class="paper-list-title-div">';
+							
+							if (item.paperType == 3) {
+								html += '<div class="paper-list-margin paper-list-title">' + item.title + '<a href="paper-preimg.html?id=' + item._id + '" >【预览】 </a></div>';
+							} else {
+								html += '<div class="paper-list-margin paper-list-title">' + item.title + '<a href="paper-preview.html?id=' + item._id + '" >【预览】 </a></div>';
+							}
+							
+							var paper_status = '未发布';						
+							if (item.status == 1) {
+								paper_status = '已发布';	
+							} else if (item.status == 2) {
+								paper_status = '已关闭';
+							}				
+							html += '<div class="paper-list-margin paper-list-state">状态：' +  paper_status + '</div>';
+							html += '<div class="paper-list-margin paper-list-answered">答卷：' + item.count + '</div>';
+							
+							html += '<div class="paper-list-margin paper-list-created-by">' + item.created_name + '</div>';
+							html += '<div class="paper-list-margin paper-list-created">' + item.created.substring(0, 10) + '</div>';
+							html += '</div><div class="paper-list-detail-div">';
+							if (item.status == 0) {
+								html += '<div class="paper-list-btn"><a href="paper-edit.html?id=' + item._id + '" >修改问卷</a></div>';
+								html += '<div class="paper-list-btn"><a href="" >设置问卷</a></div>';
+								html += '<div class="paper-list-btn">' + "<a href='#' onclick='publishPaper(\"" + item._id + "\"," + item.paperType + "\)'>" + '发布问卷</a></div>';
+								html += '<div class="paper-list-btn disabled">停止发布</div>';
+							}else {
+								html += '<div class="paper-list-btn disabled">修改问卷</div>';
+								html += '<div class="paper-list-btn disabled">设置问卷</div>';
+								html += '<div class="paper-list-btn disabled"><a href="paper-link.html?id=' + item._id + '" >问卷链接</a></div>';
+								if (item.status == 1) {
+									html += '<div class="paper-list-btn ">' + "<a href='#' onclick='stopPaper(\"" + item._id + "\")'>" + '停止发布</a></div>';
+								} else {
+									html += '<div class="paper-list-btn disabled">停止发布</div>';
+								}
+							}
+							if (item.count > 0) {
+								html += '<div class="paper-list-btn"><a href="paper-count.html?id=' + item._id + '" >统计分析</a></div>';
+								html += '<div class="paper-list-btn "><a href="' + host + '/api/a/getAnswerForExl?id=' + item._id + '&token=' + token + '" >下载问卷</a></div>';
+							} else {
+								html += '<div class="paper-list-btn disabled">统计分析</div>';
+								html += '<div class="paper-list-btn disabled">下载问卷</div>';
+							}
+							html += '<div class="paper-list-btn">' + "<a href='#' onclick='removePaper(\"" + item._id + "\")'>"  + '删除问卷</a></div>';
+							
+							html += '</div></li>';
+					  });
+					  $('.paper-list-ul').append(html);
+					} else {
+						alert(result.data.error);
+					}
+				},
+				error: function(XMLHttpRequest, textStatus, errorThrown) {
+													
+				  }
+			});
+			}
+		});
     }
     
     function removePaper(id) {
@@ -273,7 +270,7 @@
 				console.log(result.paperList)
 				if (result.state == 200) {
 					alert('停止问卷成功！');
-					location.href='paper-list.html';
+					getPaperList();
 				} else {
 					alert(result.data.error);
 				}
@@ -285,20 +282,7 @@
 		}
     	
     }
-    
-    /*
-    $.jqPaginator('#pagination2', {
-        totalPages: 100,
-        visiblePages: 10,
-        currentPage: 3,
-        prev: '<li class="prev"><a href="javascript:;">Previous</a></li>',
-        next: '<li class="next"><a href="javascript:;">Next</a></li>',
-        page: '<li class="page"><a href="javascript:;">{{page}}</a></li>',
-        onPageChange: function (num, type) {
-            $('#p2').text(type + '：' + num);
-        }
-    })
-    */
+
 </script>
 </body>
 </html>
