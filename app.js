@@ -41,5 +41,7 @@ app.on('error', (err, ctx) => {
   console.error('server error', err, ctx)
 });
 
+console.log('server is run here.');
+app.listen(3001);
 
 module.exports = app

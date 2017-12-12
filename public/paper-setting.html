@@ -1,0 +1,125 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>北京师范大学问卷系统</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="images/white-logo.png">
+  <link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+  <script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="./js/common.js"></script></head>
+  <link rel="stylesheet" type="text/css" href="./css/default.css">
+  <link rel="stylesheet" type="text/css" href="./css/wjxmaster.css">
+  
+<style>
+body , html{
+	background-image: linear-gradient(-180deg, #7CC4FB 0%, #319FF4 100%);
+	height:auto;
+}
+
+textarea{
+	width: 100%;
+}
+
+.paper-title{
+	color: #1874CD;
+	text-align: center;
+	font-size: 24px;
+	margin-top: 30px;
+	margin-bottom: 30px;
+}
+
+.container{
+	background-color: white;
+	margin: 7% 6% 10%;
+}
+.topic-desc{
+	font-weight: bold;
+}
+.split-line{
+	height: 5px;
+	border-bottom: 1px solid #FAF0E6;
+	margin-bottom: 30px;
+}
+</style>
+<body >
+		<div id="BS" style="background: #FFFFFF;" >
+            </div>
+            <script>
+                getHeaderHtml();
+			</script>
+			
+	<div class="container">
+    	<div class="col-md-4 col-xs-12 col-lg-4" >
+    	</div>
+		<div class="col-md-4 col-xs-12 col-lg-4 content" >
+    		<div class="paper-title"></div>
+					<ul>
+						<li>
+							<label for="login" class="icon user-icon">投票投选人数限制：</label>
+							<input id="imgRole" placeholder="" class="login" type="text" >
+							<div class="divclear"></div>
+						</li>
+					</ul>
+					<br><br><br>
+					<fieldset class="submit-wrapper" style="text-align: center; margin-top: 20px;">
+							<input type="submit" value="保存设置" onclick="saveRole();" class="submitbutton"  style="color:White;">
+						</fieldset>
+					<br><br><br>
+			</div></div>
+</body>
+<script type="text/javascript" >
+
+var id = getvl('id');
+$(function () {
+		getPaper();
+});
+
+function saveRole() {
+	var imgRole = $('#imgRole').val();
+	$.ajax({
+			url: host + '/api/a/savePaperRole',
+			type: "GET",
+			dataType: "json", 
+			data: {token: token, id: id, imgRole: imgRole},
+			cache: false,
+			success: function(result) {
+				console.log(result.paperList)
+				if (result.state == 200) {
+					alert('保存设置成功！');
+				} else {
+					alert(result.data.error);
+				}
+			},
+			error: function(XMLHttpRequest, textStatus, errorThrown) {
+												
+      		}
+		});
+}
+
+function getPaper() {
+    	$.ajax({
+			url: host + '/api/a/getPaper',
+			type: "GET",
+			dataType: "json", 
+			data: {token: token, id: id},
+			cache: false,
+			success: function(result) {
+				console.log(result.paperList)
+				if (result.state == 200) {
+					$('.paper-title').html(result.data.title);
+					$('#imgRole').val(result.data.option_role);
+					
+				} else {
+					alert(result.data.error);
+				}
+			},
+			error: function(XMLHttpRequest, textStatus, errorThrown) {
+												
+      		}
+		});
+    }
+</script>
+</html>

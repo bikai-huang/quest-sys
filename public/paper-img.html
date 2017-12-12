@@ -1,0 +1,462 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>北京师范大学问卷系统</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="images/white-logo.png">
+  <link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+  <script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="./js/common.js"></script></head>
+  
+<style>
+body{
+	background-image: linear-gradient(-180deg, #7CC4FB 0%, #319FF4 100%);
+}
+
+textarea{
+	width: 100%;
+}
+
+.paper-title{
+	text-align: center;
+	margin-top: 30px;
+	margin-bottom: 30px;
+	font-size: 18px;
+	color: #1198FF;
+}
+.paper-desc{
+	font-size: 14px;
+	color: #8D8D8D;
+	line-height: 24px;
+	padding-bottom: 32px;
+	border-bottom:2px solid #E0E6EA;
+	margin-bottom: 40px;
+}
+.container{
+	background-color: white;
+	margin: 7% 6% 10%;
+	padding-top:50px;
+	height:80%;
+	padding:0;
+}
+.topic-desc{
+	font-weight: bold;
+}
+.split-line{
+	height: 5px;
+	border-bottom: 1px solid #FAF0E6;
+	margin-bottom: 30px;
+}
+
+.topic-option-fill-line {
+	width: auto;
+	margin-left: 10px;
+}
+.count {
+  position: relative;
+  width: 20px;
+  height: 1px;
+  padding-right: 25px;
+}
+.count::before,
+.count::after {
+  position: absolute;
+  display: block;
+  content: '';
+  border-radius: 50%;
+  transition: .3s all esae;
+}
+.count::before {
+  top: 0;
+  left: 0;
+  width: 20px;
+  height: 20px;
+  border: 3px solid #ccc;
+}
+.count::after {
+  top: 5px;
+  left: 5px;
+  width: 11px;
+  height: 11px;
+  background-color: #fff;
+
+}
+.count:checked::before {
+  border-color: #27AE60;
+}
+.count:checked::after {
+  background-color: #27AE60;
+}
+.text{
+	width:60%;
+	height:40px;
+	padding-left:5px;
+}
+.userinfo{
+	margin: 20px 0;
+	height:34px;
+	text-align: center;
+}
+.btn{
+	width:60%;
+	height:35px;
+}
+.button{
+	margin-left:20.5%;
+	margin-bottom:80px;
+}
+input{
+	background: #FFFFFF;
+	border: 1px solid #E0E6EA;
+	border-radius: 3px;
+}
+.submit{
+	height:240px;
+	background: #E9F5FF;
+	padding-top:20px;
+}
+.contentBlock{
+	height:auto;
+	padding-left:5%;
+	padding-right:5%;
+	padding-top:30px;
+}
+.choiceImg{
+	width:100%;
+	height:auto;
+}
+ul{
+	padding:0;
+	width:100%;
+	height:auto;
+}
+li{
+	width:339px;
+	height:385px;
+	list-style-type:none;
+	float:left;
+	margin-right:20px;
+}
+@media (max-width: 600px) {
+  li{
+  	width:100%;  }
+}
+.imginfo{
+	width:100%;
+	height:340px;
+	border:1px solid #ddd;
+}
+.clearfix:after {
+  display: block;
+  content: "";
+  clear: both; 
+}
+
+.clearfix {
+  zoom: 1; 
+}
+.imgbox{
+	padding:5px;
+	width:100%;
+	height:293px;
+	margin:0 auto;
+}
+img{
+	width:100%;
+	height:100%;
+}
+.choiceItem{
+	text-align:center;
+	font-size:14px;
+}
+.num{
+	text-align: center;
+  padding-top: 10px;
+  font-size: 16px;
+  color: #ff6600;
+}
+
+.login{
+	height:100%;
+	background: #E9F5FF;
+	padding-top:20px;
+}
+</style>
+<body >
+<div class="container">
+	<div class="login">
+		<div class="userinfo">
+			<input type="text" class="topic-option-fill-line text" id="login" placeholder="请输入您对用户名" />
+		</div>
+		<div class="userinfo">
+			<input type="password" class="topic-option-fill-line text" id="password" placeholder="******" />
+		</div>
+		<button class="button btn btn-primary" type="button" onclick="login();">登录</button>
+	</div>
+	
+	<div class="contentBlock">
+		<!-- <div class="col-md-4 " >
+  	</div> -->
+		<div class="content" >
+    		<div class="paper-title"></div>
+    		<div class="paper-desc"></div>
+    		
+    		<div class="paper-content">
+
+    		</div>
+		</div>
+		<!-- <div class="col-md-4 " >
+    </div> -->
+	</div>
+	<div class="submit" style="display: none;">
+		<div class="userinfo">
+			<input type="text" class="topic-option-fill-line text" id="email" placeholder="请留下您的Email" />
+		</div>
+		<div class="userinfo">
+			<input type="text" class="topic-option-fill-line text" id="telephone" placeholder="请留下您的手机号" />
+		</div>
+		<button class="button btn btn-primary" type="button" onclick="savePaper();">提交</button>
+	</div>
+</div>
+</body>
+<script type="text/javascript" >
+
+var id = getvl('id');
+var topics = new Array();
+var topic_type = new Array();
+var topic_number = 0;
+var answer_Id = '';
+$(function () {
+	// getPaper();
+});
+
+function login() {
+	answer_Id = $('#login').val();
+	var password = $('#password').val();
+	if(!answer_Id) {
+		alert('请输入用户名。');
+		return;
+	}
+	if(!password) {
+		alert('请输入密码。');
+		return;
+	}
+	$.ajax({
+			url: host + '/api/getUserById',
+			type: "GET",
+			dataType: "json", 
+			data: {login: answer_Id, pwd: password},
+			cache: false,
+			success: function(result) {
+				if (result.state == 200) {
+					findAnswerById(answer_Id);
+					// $('.login').css('display', 'none');
+					// $('.submit').css('display', 'block');
+					// getPaper();
+				} else {
+					alert(result.data.error);
+				}
+			},
+			error: function(XMLHttpRequest, textStatus, errorThrown) {
+												
+      		}
+		});
+}
+
+
+function findAnswerById(loginName) {
+	$.ajax({
+			url: host + '/api/findAnswerById',
+			type: "GET",
+			dataType: "json", 
+			data: {login: loginName, id: id},
+			cache: false,
+			success: function(result) {
+				if (result.state == 200) {
+					if(result.data[0]) {
+						alert('您已经投过此问卷，感谢您～');
+					} else {
+						$('.login').css('display', 'none');
+						$('.submit').css('display', 'block');
+						getPaper();
+					}
+				} else {
+					alert(result.data.error);
+				}
+			},
+			error: function(XMLHttpRequest, textStatus, errorThrown) {
+												
+      		}
+		});
+}
+
+var option_role = 1;
+
+function changeCount(obj, id) {
+	var num = parseInt($('#' + id).html());
+	if(obj.checked) {
+		$('#' + id).html(num + 1);
+	} else {
+		$('#' + id).html(num - 1);
+	}
+}
+
+function getPaper() {
+    	$.ajax({
+			url: host + '/api/getPaper',
+			type: "GET",
+			dataType: "json", 
+			data: {id: id},
+			cache: false,
+			success: function(result) {
+				if (result.state == 200) {
+					$('.paper-title').html(result.data.title);
+					$('.paper-desc').html(result.data.desc);
+					var html = '';
+
+					option_role = result.data.option_role;
+
+					$.each(result.data.topics, function(i, item) {
+						topic_number = topic_number + 1;
+						topic_type.push(item.ttype);
+
+						html += '<div class="choiceImg clearfix"><ul>';
+							$.each(item.options, function(i, opItem) {
+								html += '<li><div class="imginfo clearfix"><div class="imgbox">';
+								html += '<img src="' + opItem.oimg + '" />';
+								html += '</div>';
+								html += '<div class="choiceItem"><div class="checkbox">';
+								var pp = i + 1;
+								html += '<label><input type="checkbox" value="' + pp + '" name="topic" onclick="changeCount(this, ' + i + ');" >' + opItem.odesc + '</label>';
+								html += '</div></div><p class="num"><span id="' + i + '">' + opItem.ocount + '</span>票</p></li>';
+							});
+
+						html += '</ul></div>';
+          			});
+          		$('.paper-content').append(html);
+				} else {
+					alert(result.data.error);
+				}
+			},
+			error: function(XMLHttpRequest, textStatus, errorThrown) {
+												
+      		}
+		});
+    }
+
+var startTime = new Date();
+
+	function savePaper() {
+		var checkin = true;
+		var email = $('#email').val();
+		// var regEmail = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/ 
+		// if(!email) {
+		// 	alert('请留下您宝贵的邮箱地址！');
+		// 	checkin = false;
+		// 	return;
+		// }else if(!regEmail.test(email)){
+		// 	alert('请输入正确的邮箱格式')
+		// 	checkin = false;
+		// 	return;
+		// }
+		var telephone = $('#telephone').val();
+		// var regphone = /^1[34578]\d{9}$/
+		// if(!telephone) {
+		// 	alert('请留下您宝贵的手机号码！');
+		// 	checkin = false;
+		// 	return;
+		// }else if(!regphone.test(telephone)){
+		// 	alert('请输入正确的手机号码')
+		// 	checkin = false;
+		// 	return;
+		// }
+		for(var i = 1; i <= topic_number; i++) {
+
+				var checkboxIsChecked = false;
+				var options = new Array();
+				var checkedArray = new Array();
+				var temp = document.getElementsByName('topic');
+        		for(var p=0; p<temp.length; p++) {
+					var option;
+            		if(temp[p].checked==true){
+            			checkboxIsChecked = true;
+            			checkedArray.push(1);
+						option = {
+							oanswer: 1
+						}
+        			} else {
+						option = {
+							oanswer: 0
+						}
+					}
+					options.push(option);
+				}
+				if(checkedArray.length > option_role) {
+					alert('最多只可投票给' + option_role + '位老师。');
+					topics = new Array();
+					return;
+				}
+				if(!checkboxIsChecked) {
+					checkin = false;
+					alert('第' + i + '道选择题未回答，请填写后再提交！');
+					topics = new Array();
+					return;
+				} else {
+					var topic = {
+						ttype: 1,
+						options: options
+					}
+					topics.push(topic);
+				}
+		}
+		console.log(topics);
+		if(checkin) {
+
+			$.ajax({
+			url: host + '/api/findAnswerById',
+			type: "GET",
+			dataType: "json", 
+			data: {login: answer_Id, id: id},
+			cache: false,
+			success: function(result) {
+				if (result.state == 200) {
+					if(result.data[0]) {
+						alert('您已经投过此问卷，感谢您～');
+					} else {
+						var topic = JSON.stringify(topics);
+						var endTime = new Date();
+						// console.log('endTime:' + endTime);
+						// console.log('topic:' + topic);
+					$.ajax({
+						url: host + '/api/updatePaperForAnswer',
+						type: "POST",
+						data: {id: id, topics: topic, startTime: startTime, endTime: endTime, emial: email, telephone: telephone, answer: answer_Id},
+						dataType: "json", 
+						cache: false,
+						success: function(data) {
+							location.href='thanks.html';
+						},
+						error: function(XMLHttpRequest, textStatus, errorThrown) {
+							console.log('get news error');
+						  }
+					});
+					}
+				} else {
+					alert(result.data.error);
+				}
+			},
+			error: function(XMLHttpRequest, textStatus, errorThrown) {
+												
+      		}
+		});
+		
+			
+		}
+		
+	}
+
+</script>
+</html>

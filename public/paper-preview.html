@@ -1,0 +1,151 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>北京师范大学问卷系统-预览问卷</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="images/white-logo.png">
+  <link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+  <script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="./js/common.js"></script></head>
+  <link rel="stylesheet" href="./css/paper-view.css">
+<style>
+
+</style>
+<body >
+	<div class="container">
+		<div class="contentBlock">
+			<!-- <div class="col-md-4 " >
+	  	</div> -->
+			<div class=" content" >
+	    		<div class="paper-title"></div>
+	    		<div class="paper-desc"></div>
+	    		
+	    		<div class="paper-content">
+	    		</div>
+			</div>
+			<!-- <div class="col-md-4 " >
+	    </div> -->
+		</div>
+		<div class="submit">
+			<div class="userinfo">
+				<input type="text" class="topic-option-fill-line text" id="email" placeholder="请留下您的Email" disabled/>
+			</div>
+			<div class="userinfo">
+				<input type="text" class="topic-option-fill-line text" id="telephone" placeholder="请留下您的手机号" disabled/>
+			</div>
+			<button class="button btn btn-primary" type="button" disabled>提交</button>
+		</div>
+  </div>
+</body>
+<script type="text/javascript" >
+var id = getvl('id');
+$(function () {
+		getPaper();
+});
+
+function getPaper() {
+	var lb_array = new Array();
+
+    	$.ajax({
+			url: host + '/api/a/getPaper',
+			type: "GET",
+			dataType: "json", 
+			data: {token: token, id: id},
+			cache: false,
+			success: function(result) {
+				console.log(result.paperList)
+				if (result.state == 200) {
+					$('.paper-title').html(result.data.title);
+					$('.paper-desc').html(result.data.desc);
+					var html = '';
+					$.each(result.data.topics, function(i, item) {
+
+						if (item.ttype == 0) {
+							html += '<p class="topic-desc">' + item.tdesc + '</p>';
+							$.each(item.options, function(i, opItem) {
+								html += '<div class="radio"><label>';
+								html += '<input type="radio" disabled>' + opItem.odesc;
+								html += '</label></div>';
+							});
+						} else if(item.ttype == 1) {
+							html += '<p class="topic-desc">' + item.tdesc + '</p>';
+							$.each(item.options, function(i, opItem) {
+								html += '<div class="checkbox"><label>';
+								html += '<input type="checkbox" disabled>' + opItem.odesc; 
+								html += '</label></div>';
+							});
+						} else if(item.ttype == 2) {
+							html += '<p class="topic-desc">' + item.tdesc + '</p>';
+							html += '<textarea disabled></textarea >';
+						} else if(item.ttype == 3) {
+							html += '<p class="topic-desc">' + item.tdesc + '</p>';
+							$.each(item.options, function(i, opItem) {
+								html += '<div class=""><label>';
+								html += opItem.odesc + ': <input type="text" class="topic-option-fill-line" disabled>'; 
+								html += '</label></div>';
+							});
+						} else if(item.ttype == 4) { //量表题
+							html += '<p class="topic-desc">' + item.tdesc + '</p>';
+							html += '<div id="starChange' + i + '">';
+							$.each(item.options, function(i, opItem) {
+								html += '';
+								if(i==0) {
+									html += opItem.odesc + '<span class="star starWhite"></span>'; 
+								} else if( i== item.options.length-1) {
+									html += '<span class="star starWhite"></span>' + opItem.odesc; 
+								} else {
+									html += '<span class="star starWhite"></span>'; 
+								}
+							});
+							html += '</div><input type="hidden" id="starValue' + lb_array.length + '" value="" /><br><br><br>';
+							
+						} else if(item.ttype == 5) {//下拉框
+							html += '<p class="topic-desc">' + item.tdesc + '</p>';
+							html += '<div class=""><label><select class="form-control" >';
+							$.each(item.options, function(i, opItem) {
+								html += '<option >' + opItem.odesc + '</option>'; 
+							});
+							html += '</select></label></div>';
+						} else if(item.ttype == 6) {
+							html += '<p class="topic-desc">' + item.tdesc + '</p>';
+							html += '<input type="file" >';
+							html += '<input type="hidden" value="test.xsl" >';
+						}
+
+						html += '<div class="split-line"></div>';
+          			});
+      		
+          			$('.paper-content').append(html);
+
+					for(var x=0; x< lb_array.length; x++) {
+						$('#starChange' + lb_array[x]).find('.star').each(function(index, el) {
+      						$(this).mouseover(function() {
+         					$(this).prevAll().removeClass('starWhite');
+         					$(this).prevAll().addClass('starYellow');
+
+         					$(this).removeClass('starWhite');
+         					$(this).addClass('starYellow');
+         						$('#starValue' + lb_array[x]).val(index);
+        					});
+
+        					$(this).mouseout(function() {
+         						$(this).nextAll().removeClass('starYellow');
+        	 					$(this).nextAll().addClass('starWhite');
+        					});
+     					});
+					}
+
+				} else {
+					alert(result.data.error);
+				}
+			},
+			error: function(XMLHttpRequest, textStatus, errorThrown) {
+												
+      		}
+		});
+    }
+</script>
+</html>
