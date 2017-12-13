@@ -47,7 +47,26 @@
  </head>
   
 <style>
-
+.echo{
+   	margin:10px 0 20px 240px;
+   }
+   .imgEcho{
+   	width: 109px;
+   	height: 94px;
+   	border:1px dotted #E0E6EA;
+   	background: #FCFCFC;
+   }
+   .textEcho{
+    width: 400px;
+    height: 65px;
+    border-radius: 3px;
+    border: 1px solid #E0E6EA;
+    margin-left: 20px;
+    background: #FCFCFC;
+    margin-top: 29px;
+    padding: 3px 8px;
+   }
+   
 </style>
 <body style="background: #F2F7F9;">
 <div style="background: #FFFFFF;" >
@@ -75,7 +94,7 @@
 	</div>
 
 
-	<div class="editContainer" id="default-editContainer" style="display: none;">
+	<div class="editContainer" id="default-editContainer" style="display: block;">
 		<div class="block clearfix">
 			<!--
 			<div class="build clearfix">
@@ -95,7 +114,7 @@
 			
 			<div id="option-container">
 				<div class="setName">设置选项</div>
-				<div id="option_hidden" class="setOption clearfix" style="display: none;" >
+				<div id="option_hidden" class="setOption clearfix" style="display: block;" >
 					<input type="text" class="setInput1">
 					<input type="hidden" class="optionImg" />
 					<button class="uploadImg"><i class="OImg"></i>上传图片</button>
@@ -110,6 +129,10 @@
 					<button class="uploadImg" id="uploadImg" ><i class="OImg"></i>上传图片</button>
 		      		<button class="addIssue" id="cloneOption">＋新增选项</button>
 		      		<div class="delectIssue" id="removeOption">删除此选项</div>
+				</div>
+				<div class="echo clearfix">
+					<div class="imgEcho fl"><img src="" alt=""></div>
+					<textarea name="" id="" cols="30" rows="3" class="fl textEcho"></textarea>
 				</div>
 			</div>
 			</div>

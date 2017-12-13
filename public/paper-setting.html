@@ -12,7 +12,9 @@
   <script type="text/javascript" src="./js/common.js"></script></head>
   <link rel="stylesheet" type="text/css" href="./css/default.css">
   <link rel="stylesheet" type="text/css" href="./css/wjxmaster.css">
-  
+  <link href="./css/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen">
+  <script type="text/javascript" src="js/bootstrap-datetimepicker.min.js" charset="UTF-8"></script>
+  <script type="text/javascript" src="js/locales/bootstrap-datetimepicker.fr.js" charset="UTF-8"></script>
 <style>
 body , html{
 	background-image: linear-gradient(-180deg, #7CC4FB 0%, #319FF4 100%);
@@ -43,7 +45,21 @@ textarea{
 	border-bottom: 1px solid #FAF0E6;
 	margin-bottom: 30px;
 }
+.login{
+	width: 150px;
+	height: 34px;
+	border-radius: 3px;
+	border: 1px solid #E0E6EA;
+	padding: 0 5px;
+}
+.mt{
+	margin-top: 20px;
+}
+.mb{
+	margin-bottom: 5px;
+}
 </style>
+
 <body >
 		<div id="BS" style="background: #FFFFFF;" >
             </div>
@@ -62,6 +78,26 @@ textarea{
 							<input id="imgRole" placeholder="" class="login" type="text" >
 							<div class="divclear"></div>
 						</li>
+       <li class="mt">
+       	<label for="login" class="icon user-icon mb">开始日期：</label>
+         <div class="input-group date form_date" data-date="" data-date-format="dd MM yyyy" data-link-field="dtp_input"        data-link-format="yyyy-mm-dd" >
+                           <input class="form-control" size="16" type="text" value="" readonly id="start_date">
+                           <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+       					<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+        </div>
+       				<input type="hidden" id="dtp_input" value="" />
+       </li>
+
+       <li class="mt">
+       	 <label for="login" class="icon user-icon mb">结束日期：</label>
+          <div class="input-group date form_date" data-date="" data-date-format="dd MM yyyy" data-link-field="dtp_input2"        data-link-format="yyyy-mm-dd">
+                           <input class="form-control" size="16" type="text" value="" readonly id="end_date">
+                           <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+       					<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+          </div>
+       				<input type="hidden" id="dtp_input2" value="" />
+
+        </li>
 					</ul>
 					<br><br><br>
 					<fieldset class="submit-wrapper" style="text-align: center; margin-top: 20px;">
@@ -70,11 +106,22 @@ textarea{
 					<br><br><br>
 			</div></div>
 </body>
+
 <script type="text/javascript" >
 
 var id = getvl('id');
 $(function () {
 		getPaper();
+		$('.form_date').datetimepicker({
+        language:  'fr',
+        weekStart: 1,
+        todayBtn:  1,
+				autoclose: 1,
+				todayHighlight: 1,
+				startView: 2,
+				minView: 2,
+				forceParse: 0
+			});
 });
 
 function saveRole() {

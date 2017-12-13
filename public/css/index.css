@@ -1841,6 +1841,7 @@ background-color:#f08200;
    background-image: url(./img/loginbg.png);
   background-repeat: no-repeat;
   background-size: 100% 100%;
+  padding-top: 120px;
 }
 .forget-questionLogo{
    width: 140px;
@@ -1882,7 +1883,7 @@ background-color:#f08200;
   margin-top: 100px;
 }
 .progress{
-  width: 660px;
+  width: 560px;
 }
 .closeBox{
   float: right;
